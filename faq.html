@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FAQ · J-LUNA BROWS</title>
+<meta name="description" content="J-LUNA BROWS — Featheroke brows in Anaheim, CA. Frequently asked questions.">
+<meta name="theme-color" content="#0f0e0c">
+<!--
+  ✏️ 수정 안내
+  1) 인스타 주소: 맨 아래 IG_URL 한 줄만 바꾸면 됩니다.
+  2) 답변 중 노란색 [수정 필요] 표시된 부분을 실제 내용으로 바꿔주세요.
+     (영어 <span class="en"> / 한국어 <span class="ko"> 둘 다 수정)
+  3) 수정이 끝나면 class="todo" 표시는 지워주세요.
+-->
+<style>
+  :root {
+    --bg: #0f0e0c;
+    --card: #1a1815;
+    --line: #2e2a24;
+    --beige: #d8c3a5;
+    --beige-soft: #b8a68c;
+    --text: #efe8dd;
+    --muted: #9c9284;
+    --serif: "Cormorant Garamond", "Playfair Display", Georgia, "Times New Roman", "Nanum Myeongjo", "AppleMyungjo", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  html[lang="en"] .ko, html[lang="ko"] .en { display: none !important; }
+  html[lang="ko"] body { word-break: keep-all; }
+
+  .wrap { max-width: 480px; margin: 0 auto; padding: 20px 20px calc(40px + env(safe-area-inset-bottom)); }
+
+  .topbar { display: flex; justify-content: flex-end; }
+  .lang {
+    display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px;
+  }
+  .lang button {
+    background: none; border: 0; color: var(--muted); font: 600 12px/1 var(--sans);
+    letter-spacing: .08em; padding: 7px 13px; border-radius: 999px; cursor: pointer;
+  }
+  .lang button[aria-pressed="true"] { background: var(--beige); color: var(--bg); }
+
+  header { text-align: center; padding: 36px 0 32px; }
+  .brand { font-family: var(--serif); font-size: 15px; letter-spacing: .32em; color: var(--beige); }
+  .loc { font-size: 11px; letter-spacing: .2em; color: var(--muted); margin-top: 6px; text-transform: uppercase; }
+  .rule { width: 36px; height: 1px; background: var(--beige-soft); margin: 26px auto 22px; opacity: .6; }
+  h1 { font-family: var(--serif); font-weight: 400; font-size: 34px; line-height: 1.2; letter-spacing: .01em; }
+  .sub { color: var(--muted); font-size: 14px; margin-top: 10px; }
+
+  .faq { border-top: 1px solid var(--line); }
+  .item { border-bottom: 1px solid var(--line); }
+  .q {
+    width: 100%; background: none; border: 0; color: var(--text); text-align: left;
+    font: 500 16px/1.45 var(--sans); padding: 20px 2px; display: flex; gap: 16px;
+    align-items: center; justify-content: space-between; cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .q .num { font-family: var(--serif); color: var(--beige-soft); font-size: 15px; min-width: 22px; }
+  .q .label { flex: 1; }
+  .icon { position: relative; width: 14px; height: 14px; flex-shrink: 0; }
+  .icon::before, .icon::after {
+    content: ""; position: absolute; left: 0; top: 6.5px; width: 14px; height: 1px;
+    background: var(--beige); transition: transform .3s ease;
+  }
+  .icon::after { transform: rotate(90deg); }
+  .item.open .icon::after { transform: rotate(0deg); }
+  .a {
+    display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease;
+  }
+  .item.open .a { grid-template-rows: 1fr; }
+  .a > div { overflow: hidden; }
+  .a p { color: #cfc6b8; font-size: 15px; padding: 0 2px 0 40px; }
+  .a p + p { margin-top: 10px; }
+  .a p:last-child { padding-bottom: 22px; }
+
+  .todo {
+    background: rgba(255, 214, 102, .18); color: #ffd666; border-radius: 3px;
+    padding: 0 4px; font-size: .92em; white-space: nowrap;
+  }
+
+  .cta { margin-top: 48px; text-align: center; }
+  .cta p { color: var(--muted); font-size: 14px; margin-bottom: 16px; }
+  .btn {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%; padding: 17px 20px; border-radius: 4px;
+    background: var(--beige); color: var(--bg); text-decoration: none;
+    font: 600 15px/1 var(--sans); letter-spacing: .04em;
+  }
+  .btn:active { opacity: .85; }
+  .btn svg { width: 18px; height: 18px; }
+  footer { text-align: center; margin-top: 36px; font-size: 11px; letter-spacing: .2em; color: #5f574c; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-set-lang="ko" aria-pressed="false">KO</button>
+    </div>
+  </div>
+
+  <header>
+    <div class="brand">J-LUNA BROWS</div>
+    <div class="loc">Anaheim, California</div>
+    <div class="rule"></div>
+    <h1><span class="en">FAQ</span><span class="ko">자주 묻는 질문</span></h1>
+    <p class="sub">
+      <span class="en">Everything you need to know about Featheroke.</span>
+      <span class="ko">페더로크 시술, 궁금한 점 모아뒀어요.</span>
+    </p>
+  </header>
+
+  <section class="faq">
+
+    <!-- 1. 가격 -->
+    <div class="item">
+      <button class="q" type="button" aria-expanded="false">
+        <span class="num">01</span>
+        <span class="label"><span class="en">How much is it?</span><span class="ko">가격이 얼마예요?</span></span>
+        <span class="icon" aria-hidden="true"></span>
+      </button>
+      <div class="a"><div>
+        <p class="en">Featheroke is <span class="todo">[수정 필요: price]</span>. This includes your consultation and brow mapping.</p>
+        <p class="ko">페더로크는 <span class="todo">[수정 필요: 가격]</span>입니다. 상담이랑 눈썹 디자인까지 포함이에요.</p>
+      </div></div>
+    </div>
+
+    <!-- 2. 통증 -->
+    <div class="item">
+      <button class="q" type="button" aria-expanded="false">
+        <span class="num">02</span>
+        <span class="label"><span class="en">Does it hurt?</span><span class="ko">많이 아파요?</span></span>
+        <span class="icon" aria-hidden="true"></span>
+      </button>
+      <div class="a"><div>
+        <p class="en">Most people say it feels like light scratching. We use numbing to keep you comfortable, and you can ask for a break anytime.</p>
+        <p class="ko">대부분 살짝 긁는 느낌 정도라고 하세요. 마취 크림을 쓰고, 중간에 쉬고 싶으면 언제든 말씀해 주세요.</p>
+      </div></div>
+    </div>
+
+    <!-- 3. 시술 시간 -->
+    <div class="item">
+      <button class="q" type="button" aria-expanded="false">
+        <span class="num">03</span>
+        <span class="label"><span class="en">How long does it take?</span><span class="ko">시술 시간은 얼마나 걸려요?</span></span>
+        <span class="icon" aria-hidden="true"></span>
+      </button>
+      <div class="a"><div>
+        <p class="en">Plan for about <span class="todo">[수정 필요: time]</span> total. Most of that is designing the shape with you, so take your time.</p>
+        <p class="ko">전체 <span class="todo">[수정 필요: 시간]</span> 정도 잡아주세요. 모양을 같이 잡는 데 시간을 제일 많이 써요.</p>
+      </div></div>
+    </div>
+
+    <!-- 4. 유지 기간 -->
+    <div class="item">
+      <button class="q" type="button" aria-expanded="false">
+        <span class="num">04</span>
+        <span class="label"><span class="en">How long does it last?</span><span class="ko">얼마나 유지돼요?</span></span>
+        <span class="icon" aria-hidden="true"></span>
+      </button>
+      <div class="a"><div>
+        <p class="en">Usually <span class="todo">[수정 필요: duration]</span>. It depends on your skin type, sun exposure, and skincare. Oily skin tends to fade a bit faster.</p>
+        <p class="ko">보통 <span class="todo">[수정 필요: 기간]</span> 정도예요. 피부 타입이나 햇빛, 쓰는 화장품에 따라 달라요. 지성 피부는 조금 더 빨리 흐려질 수 있어요.</p>
+      </div></div>
+    </div>
+
+    <!-- 5. 리터치 -->
+    <div class="item">
+      <button class="q" type="button" aria-expanded="false">
+        <span class="num">05</span>
+        <span class="label"><span class="en">Do I need a touch-up?</span><span class="ko">리터치는 꼭 해야 하나요?</span></span>
+        <span class="icon" aria-hidden="true"></span>
+      </button>
+      <div class="a"><div>
+        <p class="en">We recommend it. Some pigment always fades while healing, and the touch-up fills in any light spots. Book it <span class="todo">[수정 필요: timing]</span> after your first session.</p>
+        <p class="ko">하시는 걸 추천드려요. 회복하면서 색이 조금씩 빠지는데, 리터치 때 연한 부분을 채워드려요. 첫 시술 후 <span class="todo">[수정 필요: 시기]</span>에 오시면 돼요.</p>
+        <p class="en">Touch-up price: <span class="todo">[수정 필요: price]</span></p>
+        <p class="ko">리터치 가격: <span class="todo">[수정 필요: 가격]</span></p>
+      </div></div>
+    </div>
+
+    <!-- 6. 남자 눈썹 -->
+    <div class="item">
+      <button class="q" type="button" aria-expanded="false">
+        <span class="num">06</span>
+        <span class="label"><span class="en">Will it look natural on men?</span><span class="ko">남자 눈썹도 자연스러워요?</span></span>
+        <span class="icon" aria-hidden="true"></span>
+      </button>
+      <div class="a"><div>
+        <p class="en">Yes. We keep the shape close to your own brows. No sharp edges, no heavy fill. Most people just think you have good brows.</p>
+        <p class="ko">네. 원래 눈썹 모양을 살려서 해드려요. 각지거나 진하게 채우지 않아서, 주변에서는 원래 눈썹이 좋은 줄 알아요.</p>
+      </div></div>
+    </div>
+
+    <!-- 7. 타주 -->
+    <div class="item">
+      <button class="q" type="button" aria-expanded="false">
+        <span class="num">07</span>
+        <span class="label"><span class="en">I'm coming from out of state. Any tips?</span><span class="ko">다른 주에서 가려고 하는데요.</span></span>
+        <span class="icon" aria-hidden="true"></span>
+      </button>
+      <div class="a"><div>
+        <p class="en">Welcome! DM us your travel dates and we'll find a time that works. If you plan on a touch-up, let us know early so we can line up both visits.</p>
+        <p class="ko">환영해요! 오시는 날짜를 DM으로 보내주시면 시간 맞춰드릴게요. 리터치까지 생각하시면 미리 말씀해 주세요. 두 번 일정 같이 잡아드릴게요.</p>
+      </div></div>
+    </div>
+
+    <!-- 8. 예약 방법 -->
+    <div class="item">
+      <button class="q" type="button" aria-expanded="false">
+        <span class="num">08</span>
+        <span class="label"><span class="en">How do I book?</span><span class="ko">예약은 어떻게 해요?</span></span>
+        <span class="icon" aria-hidden="true"></span>
+      </button>
+      <div class="a"><div>
+        <p class="en">Send us a DM on Instagram with the dates that work for you. A deposit of <span class="todo">[수정 필요: amount]</span> holds your spot.</p>
+        <p class="ko">인스타 DM으로 원하시는 날짜 보내주세요. 예약금 <span class="todo">[수정 필요: 금액]</span> 입금하시면 확정돼요.</p>
+      </div></div>
+    </div>
+
+  </section>
+
+  <div class="cta">
+    <p><span class="en">Still have a question?</span><span class="ko">더 궁금한 게 있으신가요?</span></p>
+    <a class="btn ig-link" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      <span class="en">Message us on Instagram</span><span class="ko">인스타 DM으로 문의하기</span>
+    </a>
+  </div>
+
+  <footer>J-LUNA BROWS · ANAHEIM, CA</footer>
+</div>
+
+<script>
+  // ✏️ 인스타 주소를 여기에 입력하세요 (예: "https://ig.me/m/jlunabrows" — DM 창으로 바로 열림)
+  var IG_URL = "[여기에 인스타 주소 입력]";
+
+  document.querySelectorAll(".ig-link").forEach(function (a) { a.href = IG_URL; });
+
+  // Language toggle (default: English)
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-set-lang]").forEach(function (b) {
+      b.setAttribute("aria-pressed", b.dataset.setLang === lang ? "true" : "false");
+    });
+    try { localStorage.setItem("jluna-lang", lang); } catch (e) {}
+  }
+  document.querySelectorAll("[data-set-lang]").forEach(function (b) {
+    b.addEventListener("click", function () { setLang(b.dataset.setLang); });
+  });
+  try { var saved = localStorage.getItem("jluna-lang"); if (saved === "ko") setLang("ko"); } catch (e) {}
+
+  // Accordion
+  document.querySelectorAll(".q").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var item = btn.parentElement;
+      var open = item.classList.toggle("open");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  });
+</script>
+</body>
+</html>
