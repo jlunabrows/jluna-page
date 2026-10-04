@@ -9,9 +9,7 @@
 <!--
   ✏️ 수정 안내
   1) 인스타 주소: 맨 아래 IG_URL 한 줄만 바꾸면 됩니다.
-  2) 답변 중 노란색 [수정 필요] 표시된 부분을 실제 내용으로 바꿔주세요.
-     (영어 <span class="en"> / 한국어 <span class="ko"> 둘 다 수정)
-  3) 수정이 끝나면 class="todo" 표시는 지워주세요.
+  2) 답변을 고칠 때는 영어 class="en" / 한국어 class="ko" 둘 다 수정하세요.
 -->
 <style>
   :root {
@@ -84,6 +82,11 @@
   .a p + p { margin-top: 10px; }
   .a p:last-child { padding-bottom: 22px; }
 
+  .prices { width: calc(100% - 42px); margin: 14px 2px 0 40px; border-collapse: collapse; font-size: 15px; }
+  .prices th, .prices td { padding: 10px 0; border-bottom: 1px solid var(--line); text-align: left; font-weight: 400; }
+  .prices th { color: #cfc6b8; }
+  .prices td { color: var(--beige); text-align: right; white-space: nowrap; padding-left: 12px; }
+  .a .note { color: var(--muted); font-size: 13px; margin-top: 10px; }
   .todo {
     background: rgba(255, 214, 102, .18); color: #ffd666; border-radius: 3px;
     padding: 0 4px; font-size: .92em; white-space: nowrap;
@@ -132,8 +135,8 @@
         <span class="icon" aria-hidden="true"></span>
       </button>
       <div class="a"><div>
-        <p class="en">Featheroke is <span class="todo">[수정 필요: price]</span>. This includes your consultation and brow mapping.</p>
-        <p class="ko">페더로크는 <span class="todo">[수정 필요: 가격]</span>입니다. 상담이랑 눈썹 디자인까지 포함이에요.</p>
+        <p class="en">Featheroke is $600. This includes your consultation and brow mapping.</p>
+        <p class="ko">페더로크는 $600입니다. 상담이랑 눈썹 디자인까지 포함이에요.</p>
       </div></div>
     </div>
 
@@ -158,8 +161,8 @@
         <span class="icon" aria-hidden="true"></span>
       </button>
       <div class="a"><div>
-        <p class="en">Plan for about <span class="todo">[수정 필요: time]</span> total. Most of that is designing the shape with you, so take your time.</p>
-        <p class="ko">전체 <span class="todo">[수정 필요: 시간]</span> 정도 잡아주세요. 모양을 같이 잡는 데 시간을 제일 많이 써요.</p>
+        <p class="en">Plan for about 3 to 3.5 hours total. Most of that is designing the shape with you, so take your time.</p>
+        <p class="ko">전체 3~3.5시간 정도 잡아주세요. 모양을 같이 잡는 데 시간을 제일 많이 써요.</p>
       </div></div>
     </div>
 
@@ -171,8 +174,8 @@
         <span class="icon" aria-hidden="true"></span>
       </button>
       <div class="a"><div>
-        <p class="en">Usually <span class="todo">[수정 필요: duration]</span>. It depends on your skin type, sun exposure, and skincare. Oily skin tends to fade a bit faster.</p>
-        <p class="ko">보통 <span class="todo">[수정 필요: 기간]</span> 정도예요. 피부 타입이나 햇빛, 쓰는 화장품에 따라 달라요. 지성 피부는 조금 더 빨리 흐려질 수 있어요.</p>
+        <p class="en">About 1.5 to 2.5 years, as long as you finish your touch-up within 2 months. It also depends on your skin type, sun exposure, and skincare. Oily skin tends to fade a bit faster.</p>
+        <p class="ko">2개월 안에 터치업까지 마치시면 1.5~2.5년 정도 유지돼요. 피부 타입이나 햇빛, 쓰는 화장품에 따라 달라요. 지성 피부는 조금 더 빨리 흐려질 수 있어요.</p>
       </div></div>
     </div>
 
@@ -184,10 +187,16 @@
         <span class="icon" aria-hidden="true"></span>
       </button>
       <div class="a"><div>
-        <p class="en">We recommend it. Some pigment always fades while healing, and the touch-up fills in any light spots. Book it <span class="todo">[수정 필요: timing]</span> after your first session.</p>
-        <p class="ko">하시는 걸 추천드려요. 회복하면서 색이 조금씩 빠지는데, 리터치 때 연한 부분을 채워드려요. 첫 시술 후 <span class="todo">[수정 필요: 시기]</span>에 오시면 돼요.</p>
-        <p class="en">Touch-up price: <span class="todo">[수정 필요: price]</span></p>
-        <p class="ko">리터치 가격: <span class="todo">[수정 필요: 가격]</span></p>
+        <p class="en">We recommend it. Some pigment always fades while healing, and the touch-up fills in any light spots. About one month after your first session is the best time.</p>
+        <p class="ko">하시는 걸 추천드려요. 회복하면서 색이 조금씩 빠지는데, 리터치 때 연한 부분을 채워드려요. 첫 시술 후 한 달 뒤가 가장 좋아요.</p>
+        <table class="prices">
+          <tr><th><span class="en">Within 2 months</span><span class="ko">2개월 이내</span></th><td>$150</td></tr>
+          <tr><th><span class="en">3 to 6 months</span><span class="ko">3~6개월 이내</span></th><td>$250</td></tr>
+          <tr><th><span class="en">6 to 12 months</span><span class="ko">6~12개월 이내</span></th><td>$350</td></tr>
+          <tr><th><span class="en">After 1 year</span><span class="ko">1년 후</span></th><td><span class="en">$50 off full price</span><span class="ko">기존 가격에서 $50 할인</span></td></tr>
+        </table>
+        <p class="en note">The after-1-year discount is for returning clients only.</p>
+        <p class="ko note">1년 후 할인은 기존 고객님만 해당돼요.</p>
       </div></div>
     </div>
 
@@ -225,8 +234,10 @@
         <span class="icon" aria-hidden="true"></span>
       </button>
       <div class="a"><div>
-        <p class="en">Send us a DM on Instagram with the dates that work for you. A deposit of <span class="todo">[수정 필요: amount]</span> holds your spot.</p>
-        <p class="ko">인스타 DM으로 원하시는 날짜 보내주세요. 예약금 <span class="todo">[수정 필요: 금액]</span> 입금하시면 확정돼요.</p>
+        <p class="en">Pick a time through our booking page, or DM us on Instagram. No deposit needed.</p>
+        <p class="en">Booking a time doesn't confirm it yet. We'll text you from (213) 459-7607. Just reply to confirm and you're all set.</p>
+        <p class="ko">예약 페이지에서 시간을 고르시거나 인스타 DM 주세요. 예약금은 따로 없어요.</p>
+        <p class="ko">시간을 고르셨다고 바로 확정되는 건 아니에요. 213-459-7607 번호로 확인 문자를 보내드리니, 답장으로 확인해 주시면 예약이 확정돼요.</p>
       </div></div>
     </div>
 
