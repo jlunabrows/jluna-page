@@ -1,0 +1,622 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>J-LUNA BROWS · Model Casting</title>
+<style>
+  @font-face { font-family: "Cormorant"; font-weight: 300; font-style: normal; src: url(fonts/cormorant-garamond-latin-300-normal.woff2) format("woff2"); }
+  @font-face { font-family: "Cormorant"; font-weight: 400; font-style: normal; src: url(fonts/cormorant-garamond-latin-400-normal.woff2) format("woff2"); }
+  @font-face { font-family: "Cormorant"; font-weight: 500; font-style: normal; src: url(fonts/cormorant-garamond-latin-500-normal.woff2) format("woff2"); }
+  @font-face { font-family: "Cormorant"; font-weight: 300; font-style: italic; src: url(fonts/cormorant-garamond-latin-300-italic.woff2) format("woff2"); }
+  @font-face { font-family: "Cormorant"; font-weight: 400; font-style: italic; src: url(fonts/cormorant-garamond-latin-400-italic.woff2) format("woff2"); }
+  @font-face { font-family: "Cormorant"; font-weight: 500; font-style: italic; src: url(fonts/cormorant-garamond-latin-500-italic.woff2) format("woff2"); }
+  @font-face { font-family: "Jost"; font-weight: 300; src: url(fonts/jost-latin-300-normal.woff2) format("woff2"); }
+  @font-face { font-family: "Jost"; font-weight: 400; src: url(fonts/jost-latin-400-normal.woff2) format("woff2"); }
+  @font-face { font-family: "Jost"; font-weight: 500; src: url(fonts/jost-latin-500-normal.woff2) format("woff2"); }
+  @font-face { font-family: "NotoSerifKR"; font-weight: 300; src: url(fonts/noto-serif-kr-korean-300-normal.woff2) format("woff2"); }
+  @font-face { font-family: "NotoSerifKR"; font-weight: 400; src: url(fonts/noto-serif-kr-korean-400-normal.woff2) format("woff2"); }
+  @font-face { font-family: "NotoSerifKR"; font-weight: 500; src: url(fonts/noto-serif-kr-korean-500-normal.woff2) format("woff2"); }
+  @font-face { font-family: "NotoSansKR"; font-weight: 300; src: url(fonts/noto-sans-kr-korean-300-normal.woff2) format("woff2"); }
+  @font-face { font-family: "NotoSansKR"; font-weight: 400; src: url(fonts/noto-sans-kr-korean-400-normal.woff2) format("woff2"); }
+
+  :root {
+    --beige: #dcc6a6;
+    --champagne: #efe0c4;
+    --bronze: #9c7c56;
+    --ink: #0b0a09;
+    --text: #f3ece1;
+    --muted: #a39683;
+    --serif: "Cormorant", "NotoSerifKR", serif;
+    --sans: "Jost", "NotoSansKR", sans-serif;
+  }
+  html[lang="ko"] body { word-break: keep-all; }
+  html[lang="ko"] { --serif: "Cormorant", "NotoSerifKR", serif; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ink); }
+  body { color: var(--text); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+
+  #stage { position: absolute; inset: 0; overflow: hidden;
+    background: radial-gradient(120% 80% at 50% 45%, #1d1813 0%, #120f0c 45%, #080706 100%); }
+  #warm { position: absolute; width: 1400px; height: 1400px; border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(220,190,150,.13), rgba(220,190,150,0)); }
+  canvas#gl { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+  #vignette { position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(110% 75% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%); }
+  #grain { position: absolute; inset: 0; width: 1080px; height: 1920px; opacity: .07; mix-blend-mode: overlay; image-rendering: pixelated; }
+
+  .layer { position: absolute; inset: 0; }
+  .abs { position: absolute; left: 0; right: 0; text-align: center; will-change: transform, opacity, filter; }
+  .mask { overflow: hidden; display: block; padding: 0.06em 0 0.12em; }
+  .mask > span { display: inline-block; will-change: transform; }
+
+  .eyebrow { font-family: "Jost", "NotoSansKR", sans-serif; font-weight: 400; font-size: 26px; letter-spacing: .42em; color: var(--beige); text-transform: uppercase; padding-left: .42em; }
+  html[lang="ko"] .eyebrow.ko-sans { letter-spacing: .3em; font-size: 28px; }
+  .rule { width: 90px; height: 1px; background: var(--beige); margin: 0 auto; opacity: .7; transform-origin: center; }
+
+  /* 1 · intro */
+  #brand { top: 1420px; }
+  #brand .name { font-family: "Cormorant"; font-weight: 400; font-size: 76px; letter-spacing: .34em; padding-left: .34em; color: var(--champagne); }
+  #brand .loc { margin-top: 22px; }
+
+  /* persistent chrome */
+  #topmark { top: 150px; font-family: "Cormorant"; font-size: 34px; letter-spacing: .4em; padding-left: .4em; color: var(--beige); }
+  #botmark { top: 1640px; }
+
+  /* 2 · model casting */
+  #casting { top: 1080px; }
+  #casting .big { font-family: var(--serif); font-weight: 300; font-size: 190px; line-height: .95; color: var(--text); }
+  #casting .big i { font-style: italic; color: var(--champagne); }
+  html[lang="ko"] #casting .big { font-size: 150px; font-weight: 300; line-height: 1.15; letter-spacing: .02em; }
+  #casting .sub { margin-top: 44px; }
+
+  /* 3 · no promotions */
+  #promo { top: 760px; }
+  #promo .l1 { font-family: var(--serif); font-weight: 400; font-size: 66px; line-height: 1.2; }
+  #promo .l2 { margin-top: 70px; font-family: var(--serif); font-weight: 300; font-style: italic; font-size: 60px; line-height: 1.25; color: var(--muted); }
+  #promo .l3 { margin-top: 8px; font-family: var(--serif); font-weight: 400; font-style: italic; font-size: 112px; line-height: 1.1; color: var(--champagne); }
+  html[lang="ko"] #promo .l1 { font-size: 52px; font-weight: 400; line-height: 1.55; }
+  html[lang="ko"] #promo .l2 { font-style: normal; font-size: 46px; line-height: 1.6; }
+  html[lang="ko"] #promo .l3 { font-style: normal; font-size: 82px; font-weight: 400; line-height: 1.35; }
+
+  /* 4 · two models */
+  #two-title { top: 270px; }
+  #two-title .t { font-family: var(--serif); font-weight: 300; font-size: 92px; line-height: 1.1; }
+  #two-title .t i { font-style: italic; color: var(--champagne); }
+  html[lang="ko"] #two-title .t { font-size: 76px; line-height: 1.3; }
+  .who { font-family: var(--sans); }
+  .who .num { font-family: "Cormorant"; font-style: italic; font-size: 56px; color: var(--beige); display: block; line-height: 1; }
+  .who .lab { display: block; margin-top: 12px; font-size: 30px; letter-spacing: .38em; padding-left: .38em; text-transform: uppercase; color: var(--text); font-weight: 400; }
+  html[lang="ko"] .who .lab { letter-spacing: .2em; font-size: 36px; }
+  #who-w { top: 850px; }
+  #who-m { top: 1395px; }
+
+  /* 5 · requirements */
+  #req-title { top: 330px; }
+  #req-title .t { font-family: var(--serif); font-weight: 300; font-size: 104px; line-height: 1.1; }
+  #req-title .t i { font-style: italic; color: var(--champagne); }
+  html[lang="ko"] #req-title .t { font-size: 80px; line-height: 1.3; }
+  #card { position: absolute; left: 90px; right: 90px; top: 640px; padding: 30px 64px;
+    border: 1px solid rgba(220,198,166,.35); border-radius: 4px;
+    background: linear-gradient(160deg, rgba(40,33,26,.55), rgba(16,13,10,.45));
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 40px 120px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,240,215,.08); }
+  .req { display: flex; gap: 38px; align-items: baseline; padding: 46px 0; border-bottom: 1px solid rgba(220,198,166,.18); }
+  .req:last-child { border-bottom: 0; }
+  .req .n { font-family: "Cormorant"; font-style: italic; font-size: 54px; color: var(--beige); min-width: 64px; }
+  .req .txt { font-family: var(--serif); font-weight: 400; font-size: 52px; line-height: 1.25; text-align: left; }
+  html[lang="ko"] .req .txt { font-family: "NotoSerifKR"; font-size: 42px; line-height: 1.5; font-weight: 400; }
+  #req-foot { top: 1500px; }
+
+  /* 6 · CTA */
+  #cta { top: 1040px; }
+  #cta .apply { font-family: var(--serif); font-weight: 300; font-size: 110px; line-height: 1.05; }
+  #cta .apply i { font-style: italic; color: var(--champagne); }
+  html[lang="ko"] #cta .apply { font-size: 78px; line-height: 1.35; }
+  #cta .handle { margin-top: 56px; display: inline-flex; align-items: center; gap: 22px;
+    padding: 30px 56px; border: 1px solid var(--beige); border-radius: 999px;
+    font-family: "Jost"; font-weight: 400; font-size: 48px; letter-spacing: .06em; color: var(--champagne); }
+  #cta .handle svg { width: 46px; height: 46px; }
+  #cta .note { margin-top: 48px; font-family: var(--sans); font-size: 30px; letter-spacing: .08em; color: var(--muted); }
+  html[lang="ko"] #cta .note { font-size: 32px; letter-spacing: .02em; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="warm"></div>
+  <canvas id="gl" width="1080" height="1920"></canvas>
+  <div id="vignette"></div>
+
+  <div class="layer" id="text">
+    <!-- persistent chrome -->
+    <div class="abs" id="topmark">J-LUNA BROWS</div>
+    <div class="abs eyebrow" id="botmark">Anaheim · California</div>
+
+    <!-- 1 -->
+    <div class="abs" id="brand">
+      <div class="name">J-LUNA BROWS</div>
+      <div class="rule" style="margin-top:34px"></div>
+      <div class="eyebrow loc">Anaheim · California</div>
+    </div>
+
+    <!-- 2 -->
+    <div class="abs" id="casting">
+      <div class="big" data-i18n="casting"></div>
+      <div class="eyebrow sub ko-sans" data-i18n="castingSub"></div>
+    </div>
+
+    <!-- 3 -->
+    <div class="abs" id="promo">
+      <div class="l1" data-i18n="promo1"></div>
+      <div class="l2" data-i18n="promo2"></div>
+      <div class="l3" data-i18n="promo3"></div>
+    </div>
+
+    <!-- 4 -->
+    <div class="abs" id="two-title"><div class="t" data-i18n="twoTitle"></div></div>
+    <div class="abs who" id="who-w"><span class="num">01</span><span class="lab" data-i18n="woman"></span></div>
+    <div class="abs who" id="who-m"><span class="num">01</span><span class="lab" data-i18n="man"></span></div>
+
+    <!-- 5 -->
+    <div class="abs" id="req-title"><div class="t" data-i18n="reqTitle"></div></div>
+    <div id="card">
+      <div class="req" id="r1"><span class="n">01</span><span class="txt" data-i18n="req1"></span></div>
+      <div class="req" id="r2"><span class="n">02</span><span class="txt" data-i18n="req2"></span></div>
+      <div class="req" id="r3"><span class="n">03</span><span class="txt" data-i18n="req3"></span></div>
+    </div>
+    <div class="abs eyebrow ko-sans" id="req-foot" data-i18n="reqFoot"></div>
+
+    <!-- 6 -->
+    <div class="abs" id="cta">
+      <div class="apply" data-i18n="apply"></div>
+      <div class="handle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.6" r=".9" fill="currentColor" stroke="none"/></svg>
+        @jluna_brows
+      </div>
+      <div class="note" data-i18n="ctaNote"></div>
+    </div>
+  </div>
+
+  <canvas id="grain" width="540" height="960"></canvas>
+</div>
+
+<script type="module">
+import * as THREE from "./three.module.min.js";
+
+const LANG = new URLSearchParams(location.search).get("lang") === "ko" ? "ko" : "en";
+document.documentElement.lang = LANG;
+
+const COPY = {
+  en: {
+    casting: "Model<br><i>Casting</i>",
+    castingSub: "Featheroke · Signature Brows",
+    promo1: "We don’t do promotions.",
+    promo2: "So if you’ve been waiting for one,",
+    promo3: "this is it.",
+    twoTitle: "Looking for <i>two</i> models",
+    woman: "Woman",
+    man: "Man",
+    reqTitle: "Who we’re<br><i>looking for</i>",
+    req1: "Comfortable showing your face",
+    req2: "Happy to join the photo &amp; video shoot",
+    req3: "No previous brow tattoo or PMU residue",
+    reqFoot: "One woman · One man",
+    apply: "Apply by <i>DM</i>",
+    ctaNote: "Only two spots. Send us a message.",
+  },
+  ko: {
+    casting: "모델 모집",
+    castingSub: "페더로크 · 시그니처 눈썹",
+    promo1: "제이루나 브로우는<br>프로모션을 하지 않습니다.",
+    promo2: "그동안 기다려 오셨다면,",
+    promo3: "지금이 기회예요.",
+    twoTitle: "모델 두 분을 모십니다",
+    woman: "여성",
+    man: "남성",
+    reqTitle: "이런 분을 찾아요",
+    req1: "얼굴 공개가 부담 없으신 분",
+    req2: "사진·영상 촬영에 협조해 주실 수 있는 분",
+    req3: "기존 반영구 잔흔이 없는 분",
+    reqFoot: "여성 1분 · 남성 1분",
+    apply: "인스타 DM으로<br>신청해 주세요",
+    ctaNote: "딱 두 분만 모십니다.",
+  },
+}[LANG];
+document.querySelectorAll("[data-i18n]").forEach(el => { el.innerHTML = COPY[el.dataset.i18n]; });
+
+// ---------- utils ----------
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, k) => a + (b - a) * k;
+const easeOut = k => 1 - Math.pow(1 - k, 3);
+const easeInOut = k => k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+const expoOut = k => k === 1 ? 1 : 1 - Math.pow(2, -10 * k);
+const seg = (t, a, b) => clamp((t - a) / (b - a));
+function rng(seed) { let s = seed >>> 0; return () => { s = (s + 0x6D2B79F5) >>> 0; let x = s; x = Math.imul(x ^ (x >>> 15), x | 1); x ^= x + Math.imul(x ^ (x >>> 7), x | 61); return ((x ^ (x >>> 14)) >>> 0) / 4294967296; }; }
+
+// ---------- renderer ----------
+const canvas = document.getElementById("gl");
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1);
+renderer.setSize(1080, 1920, false);
+renderer.setClearColor(0x000000, 0);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(35, 1080 / 1920, 0.1, 200);
+camera.position.set(0, 0, 22);
+
+const C_A = new THREE.Color("#f3e3c6");
+const C_B = new THREE.Color("#a7825a");
+
+// ---------- stroke ribbons (tapered hair strokes) ----------
+const strokeVS = `
+  attribute float aU; attribute float aOrder; attribute float aSeed; attribute float aCol;
+  uniform float uTime; uniform float uFlutter;
+  varying float vU; varying float vOrder; varying float vSeed; varying float vCol;
+  void main() {
+    vec3 p = position;
+    p.z += sin(aU * 2.6 + uTime * 1.4 + aSeed * 6.2831) * uFlutter * aU;
+    p.x += cos(aU * 2.0 + uTime * 1.1 + aSeed * 4.0) * uFlutter * 0.35 * aU;
+    vU = aU; vOrder = aOrder; vSeed = aSeed; vCol = aCol;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+  }`;
+const strokeFS = `
+  uniform float uReveal; uniform float uSpan; uniform float uOpacity; uniform float uTime;
+  uniform vec3 uColA; uniform vec3 uColB;
+  varying float vU; varying float vOrder; varying float vSeed; varying float vCol;
+  void main() {
+    float k = clamp((uReveal - vOrder) / uSpan, 0.0, 1.0);
+    if (k <= 0.0) discard;
+    float draw = 1.0 - smoothstep(k - 0.08, k, vU);
+    if (k >= 1.0) draw = 1.0;
+    float shimmer = 0.78 + 0.22 * sin(uTime * 1.7 + vSeed * 37.0);
+    float tipFade = 1.0 - 0.55 * vU;
+    vec3 col = mix(uColA, uColB, vCol);
+    float a = draw * shimmer * tipFade * uOpacity;
+    gl_FragColor = vec4(col * a, a);
+  }`;
+function strokeMaterial(opts = {}) {
+  return new THREE.ShaderMaterial({
+    vertexShader: strokeVS, fragmentShader: strokeFS,
+    uniforms: {
+      uTime: { value: 0 }, uFlutter: { value: opts.flutter ?? 0 }, uReveal: { value: 0 },
+      uSpan: { value: opts.span ?? 0.12 }, uOpacity: { value: 1 },
+      uColA: { value: (opts.colA ?? C_A).clone() }, uColB: { value: (opts.colB ?? C_B).clone() },
+    },
+    transparent: true, depthWrite: false, depthTest: false, side: THREE.DoubleSide,
+    blending: THREE.CustomBlending, blendEquation: THREE.AddEquation,
+    blendSrc: THREE.OneFactor, blendDst: THREE.OneMinusSrcAlphaFactor,
+  });
+}
+// strokes: [{pts:[Vector3], w, order, seed, col?, nrm?:Vector3}]
+function buildStrokes(strokes) {
+  const pos = [], aU = [], aOrder = [], aSeed = [], aCol = [], idx = [];
+  const T = new THREE.Vector3(), S = new THREE.Vector3();
+  let base = 0;
+  for (const s of strokes) {
+    const n = s.pts.length, nrm = s.nrm || new THREE.Vector3(0, 0, 1);
+    for (let i = 0; i < n; i++) {
+      const u = i / (n - 1);
+      const a = s.pts[Math.max(0, i - 1)], b = s.pts[Math.min(n - 1, i + 1)];
+      T.subVectors(b, a).normalize();
+      S.crossVectors(nrm, T).normalize();
+      const w = s.w * Math.pow(Math.sin(Math.PI * clamp(u * 0.94 + 0.03)), 0.75) * 0.5;
+      const p = s.pts[i];
+      pos.push(p.x + S.x * w, p.y + S.y * w, p.z + S.z * w, p.x - S.x * w, p.y - S.y * w, p.z - S.z * w);
+      for (let k = 0; k < 2; k++) { aU.push(u); aOrder.push(s.order); aSeed.push(s.seed); aCol.push(s.col ?? u); }
+      if (i < n - 1) { const v = base + i * 2; idx.push(v, v + 1, v + 2, v + 1, v + 3, v + 2); }
+    }
+    base += n * 2;
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute("aU", new THREE.Float32BufferAttribute(aU, 1));
+  g.setAttribute("aOrder", new THREE.Float32BufferAttribute(aOrder, 1));
+  g.setAttribute("aSeed", new THREE.Float32BufferAttribute(aSeed, 1));
+  g.setAttribute("aCol", new THREE.Float32BufferAttribute(aCol, 1));
+  g.setIndex(idx);
+  return g;
+}
+function curve(p0, dir, len, bend, bendDir, n = 10) {
+  const pts = [];
+  for (let i = 0; i < n; i++) {
+    const u = i / (n - 1);
+    pts.push(new THREE.Vector3(
+      p0.x + dir.x * len * u + bendDir.x * bend * len * u * u,
+      p0.y + dir.y * len * u + bendDir.y * bend * len * u * u,
+      p0.z + dir.z * len * u + bendDir.z * bend * len * u * u));
+  }
+  return pts;
+}
+
+// ---------- feather ----------
+function makeFeather() {
+  const R = rng(7), strokes = [];
+  const H = 12, rach = s => new THREE.Vector3(-0.55 * s * s + 0.2 * s, -H / 2 + H * s, 0);
+  // rachis
+  const rp = []; for (let i = 0; i <= 40; i++) rp.push(rach(i / 40));
+  strokes.push({ pts: rp, w: 0.07, order: 0, seed: .3, col: 0.1 });
+  const N = 300;
+  for (const side of [-1, 1]) {
+    for (let i = 0; i < N; i++) {
+      let s = 0.05 + 0.93 * (i / N) + (R() - .5) * 0.004;
+      const clump = Math.sin(i * 0.37 + side) * 0.5 + 0.5;
+      if (R() < 0.04) continue; // small natural gaps
+      const base = rach(s);
+      const t1 = rach(Math.min(1, s + 0.01)).sub(base).normalize();
+      const width = 2.7 * Math.pow(Math.sin(Math.PI * Math.pow(s, 0.8)), 0.85) * (0.92 + 0.08 * clump);
+      const ang = (0.55 + 0.35 * (1 - s)) * (1 + (R() - .5) * 0.06);
+      const out = new THREE.Vector3(side, 0, 0);
+      const dir = new THREE.Vector3().addScaledVector(out, Math.sin(ang)).addScaledVector(t1, Math.cos(ang)).normalize();
+      const len = width / Math.sin(ang) * (0.9 + R() * 0.12);
+      const pts = curve(base, dir, len, 0.28 + R() * 0.1, t1, 12);
+      strokes.push({ pts, w: 0.02 + R() * 0.008, order: s * 0.9, seed: R(), col: 0.15 + 0.7 * s * 0.4 });
+    }
+    // down at the base
+    for (let i = 0; i < 40; i++) {
+      const s = R() * 0.08, base = rach(s);
+      const dir = new THREE.Vector3(side * (0.6 + R() * 0.6), 0.3 + R() * 0.6, (R() - .5) * 0.6).normalize();
+      strokes.push({ pts: curve(base, dir, 0.8 + R() * 1.1, 0.6, new THREE.Vector3(0, 1, 0), 10), w: 0.012, order: 0.02 + R() * 0.05, seed: R(), col: 0.6 });
+    }
+  }
+  const mat = strokeMaterial({ flutter: 0.22, span: 0.14 });
+  const mesh = new THREE.Mesh(buildStrokes(strokes), mat);
+  const grp = new THREE.Group(); grp.add(mesh);
+  return { grp, mat };
+}
+
+// ---------- brow (hair-stroke eyebrow) ----------
+function makeBrow({ arch, peakAt, thick, tailDrop, count, seed, width }) {
+  const R = rng(seed), strokes = [];
+  const yc = x => { const d = x < peakAt ? (x - peakAt) / peakAt : (x - peakAt) / (1 - peakAt); return arch * (1 - d * d) - tailDrop * x * x; };
+  const th = x => thick * (1 - Math.pow(x, 2.4)) + 0.018 + (x < 0.08 ? -0.03 * (1 - x / 0.08) : 0);
+  for (let i = 0; i < count; i++) {
+    const x = Math.pow(R(), 0.92) * 0.97;
+    const v = (R() - .5);
+    const slope = Math.atan2(yc(x + 0.01) - yc(x - 0.01), 0.02);
+    let ang;
+    if (x < 0.14) ang = lerp(1.35, slope + 0.5, x / 0.14) + (R() - .5) * 0.15;
+    else ang = slope + (v < 0 ? 0.42 : -0.18) * (1 - x * 0.55) + (R() - .5) * 0.12;
+    const len = (x < 0.14 ? 0.05 : 0.075) + R() * 0.035;
+    const p0 = new THREE.Vector3(x, yc(x) + v * th(x) - (x < 0.14 ? 0.02 : 0), (R() - .5) * 0.02);
+    const dir = new THREE.Vector3(Math.cos(ang), Math.sin(ang), 0);
+    const bendDir = new THREE.Vector3(1, -0.2, 0).normalize();
+    const pts = curve(p0, dir, len, 0.18 + R() * 0.15, bendDir, 9).map(p => p.set((p.x - 0.5) * width, p.y * width, p.z * width));
+    strokes.push({ pts, w: 0.0055 * width + R() * 0.0016 * width, order: x * 0.86 + R() * 0.06, seed: R(), col: 0.25 + R() * 0.55 });
+  }
+  return strokes;
+}
+function browMesh(strokes, span = 0.1) {
+  const mat = strokeMaterial({ span, colA: new THREE.Color("#f6e7cc"), colB: new THREE.Color("#b08d64") });
+  return { mesh: new THREE.Mesh(buildStrokes(strokes), mat), mat };
+}
+
+// ---------- ring of strokes ----------
+function makeRing() {
+  const R = rng(21), strokes = [], N = 320, Rad = 3.35;
+  for (let i = 0; i < N; i++) {
+    const a = (i / N) * Math.PI * 2 + (R() - .5) * 0.02;
+    const r = Rad + (R() - .5) * 0.38;
+    const p0 = new THREE.Vector3(Math.cos(a) * r, Math.sin(a) * r, (R() - .5) * 0.2);
+    const tan = new THREE.Vector3(-Math.sin(a), Math.cos(a), 0);
+    const outv = new THREE.Vector3(Math.cos(a), Math.sin(a), 0);
+    const dir = tan.clone().multiplyScalar(Math.cos(0.42)).addScaledVector(outv, Math.sin(0.42) * (R() < .5 ? 1 : -1)).normalize();
+    strokes.push({ pts: curve(p0, dir, 0.45 + R() * 0.35, 0.25, tan, 9), w: 0.022, order: i / N, seed: R(), col: 0.2 + R() * 0.6 });
+  }
+  const mat = strokeMaterial({ span: 0.06, flutter: 0.05 });
+  return { mesh: new THREE.Mesh(buildStrokes(strokes), mat), mat };
+}
+
+// ---------- loose floating strokes ----------
+function makeLoose() {
+  const R = rng(99), strokes = [];
+  for (let i = 0; i < 260; i++) {
+    const p0 = new THREE.Vector3((R() - .5) * 16, (R() - .5) * 26, -R() * 18 + 2);
+    const dir = new THREE.Vector3(R() - .5, R() - .5, (R() - .5) * 0.6).normalize();
+    const nrm = new THREE.Vector3(R() - .5, R() - .5, 1).normalize();
+    const bend = new THREE.Vector3().crossVectors(nrm, dir).normalize();
+    strokes.push({ pts: curve(p0, dir, 0.6 + R() * 0.9, 0.3, bend, 9), w: 0.03, order: R() * 0.8, seed: R(), col: R(), nrm });
+  }
+  const mat = strokeMaterial({ span: 0.2, flutter: 0.12 });
+  return { mesh: new THREE.Mesh(buildStrokes(strokes), mat), mat };
+}
+
+// ---------- particles (dust + converge targets) ----------
+function makeParticles(targetStrokes, browOffset) {
+  const R = rng(4), N = 2600, pos = [], tgt = [], seed = [], has = [], size = [];
+  const allPts = targetStrokes.flatMap(s => s.pts);
+  for (let i = 0; i < N; i++) {
+    pos.push((R() - .5) * 26, (R() - .5) * 40, -R() * 40 + 8);
+    const p = allPts[Math.floor(R() * allPts.length)];
+    tgt.push(p.x + browOffset.x, p.y + browOffset.y, p.z + browOffset.z);
+    seed.push(R()); has.push(i < 1700 ? 1 : 0); size.push(0.6 + R() * 1.6);
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute("aTarget", new THREE.Float32BufferAttribute(tgt, 3));
+  g.setAttribute("aSeed", new THREE.Float32BufferAttribute(seed, 1));
+  g.setAttribute("aHas", new THREE.Float32BufferAttribute(has, 1));
+  g.setAttribute("aSize", new THREE.Float32BufferAttribute(size, 1));
+  const mat = new THREE.ShaderMaterial({
+    uniforms: { uTime: { value: 0 }, uConv: { value: 0 }, uOpacity: { value: 1 }, uCol: { value: new THREE.Color("#ecd9b8") } },
+    vertexShader: `
+      attribute vec3 aTarget; attribute float aSeed; attribute float aHas; attribute float aSize;
+      uniform float uTime; uniform float uConv; varying float vA; varying float vTw;
+      void main() {
+        vec3 p = position;
+        p.y = mod(position.y + uTime * (0.25 + aSeed * 0.35) + 20.0, 40.0) - 20.0;
+        p.x += sin(uTime * 0.3 + aSeed * 12.0) * 0.6;
+        float d = clamp((uConv - aSeed * 0.45) / 0.55, 0.0, 1.0);
+        d = d * d * (3.0 - 2.0 * d);
+        d *= aHas;
+        vec3 q = mix(p, aTarget, d);
+        vec4 mv = modelViewMatrix * vec4(q, 1.0);
+        gl_Position = projectionMatrix * mv;
+        float s = mix(aSize, 2.6, d) * (1.0 + 1.2 * d * (1.0 - d) * 4.0);
+        gl_PointSize = s * 70.0 / -mv.z;
+        vTw = 0.55 + 0.45 * sin(uTime * 2.3 + aSeed * 60.0);
+        vA = mix(0.55, 1.6, d) * smoothstep(-48.0, -14.0, mv.z) ;
+      }`,
+    fragmentShader: `
+      uniform float uOpacity; uniform vec3 uCol; varying float vA; varying float vTw;
+      void main() {
+        float r = length(gl_PointCoord - 0.5);
+        float a = smoothstep(0.5, 0.0, r);
+        a = a * a * vA * vTw * uOpacity;
+        gl_FragColor = vec4(uCol * a, a);
+      }`,
+    transparent: true, depthWrite: false, depthTest: false,
+    blending: THREE.CustomBlending, blendEquation: THREE.AddEquation, blendSrc: THREE.OneFactor, blendDst: THREE.OneFactor,
+  });
+  return { pts: new THREE.Points(g, mat), mat };
+}
+
+// ---------- build scene ----------
+const feather = makeFeather(); feather.grp.scale.setScalar(0.8); scene.add(feather.grp);
+const ring = makeRing(); const ringGrp = new THREE.Group(); ringGrp.add(ring.mesh); scene.add(ringGrp);
+
+const wStrokes = makeBrow({ arch: 0.13, peakAt: 0.64, thick: 0.13, tailDrop: 0.05, count: 300, seed: 11, width: 5.5 });
+const mStrokes = makeBrow({ arch: 0.045, peakAt: 0.7, thick: 0.17, tailDrop: 0.03, count: 400, seed: 12, width: 5.7 });
+const bw = browMesh(wStrokes), bm = browMesh(mStrokes);
+const browW = new THREE.Group(); browW.add(bw.mesh); browW.position.set(0, 2.55, 0); scene.add(browW);
+const browM = new THREE.Group(); browM.add(bm.mesh); browM.position.set(0, -1.45, 0); scene.add(browM);
+
+const loose = makeLoose(); scene.add(loose.mesh);
+
+const ctaStrokes = makeBrow({ arch: 0.1, peakAt: 0.66, thick: 0.15, tailDrop: 0.04, count: 420, seed: 31, width: 5.9 });
+const ctaOffset = new THREE.Vector3(0, 2.6, 0);
+const cb = browMesh(ctaStrokes, 0.25);
+const browC = new THREE.Group(); browC.add(cb.mesh); browC.position.copy(ctaOffset); scene.add(browC);
+const parts = makeParticles(ctaStrokes, ctaOffset); scene.add(parts.pts);
+
+// ---------- DOM animation helpers ----------
+const $ = s => document.querySelector(s);
+function show(el, t, tin, tout, o = {}) {
+  const dur = o.dur ?? 1.0, od = o.outDur ?? 0.5, y = o.y ?? 36, blur = o.blur ?? 10;
+  const p = easeOut(seg(t, tin, tin + dur));
+  const q = 1 - easeInOut(seg(t, tout - od, tout));
+  const a = p * q;
+  el.style.opacity = a.toFixed(4);
+  el.style.transform = `translateY(${((1 - p) * y - (1 - q) * 14).toFixed(2)}px)` + (o.scale ? ` scale(${lerp(o.scale, 1, p).toFixed(4)})` : "");
+  el.style.filter = `blur(${((1 - p) * blur + (1 - q) * 6).toFixed(2)}px)`;
+  if (o.ls) el.style.letterSpacing = lerp(o.ls[0], o.ls[1], easeOut(seg(t, tin, tin + (o.lsDur ?? 2.2)))) + "em";
+  el.style.visibility = a <= 0.001 ? "hidden" : "visible";
+}
+
+// grain
+const gctx = $("#grain").getContext("2d");
+const gimg = gctx.createImageData(540, 960);
+function grain(frame) {
+  const R = rng(1000 + frame), d = gimg.data;
+  for (let i = 0; i < d.length; i += 4) { const v = R() * 255; d[i] = d[i + 1] = d[i + 2] = v; d[i + 3] = 255; }
+  gctx.putImageData(gimg, 0, 0);
+}
+
+// ---------- timeline ----------
+const DURATION = 25;
+function renderAt(t, frame = 0) {
+  // background warmth drift
+  const warm = $("#warm");
+  warm.style.transform = `translate(${-160 + Math.sin(t * 0.22) * 120}px, ${260 + Math.cos(t * 0.17) * 180}px)`;
+
+  // camera drift
+  camera.position.set(Math.sin(t * 0.12) * 0.9, Math.cos(t * 0.1) * 0.5, lerp(26, 22, easeOut(seg(t, 0, 4.5))));
+  camera.lookAt(0, 0, 0);
+
+  // FEATHER: 0–10s
+  {
+    const m = feather.mat.uniforms;
+    m.uTime.value = t;
+    m.uReveal.value = lerp(0.32, 1.15, easeOut(seg(t, 0, 3.0)));
+    const out = easeInOut(seg(t, 8.0, 10.2));
+    m.uOpacity.value = (1 - out) * lerp(1, 0.55, easeInOut(seg(t, 4.0, 5.2)));
+    const g = feather.grp;
+    g.rotation.set(0.15 + Math.sin(t * 0.4) * 0.06, lerp(-1.3, 0.25, easeOut(seg(t, 0, 4.2))) + t * 0.05, lerp(0.55, 0.42, seg(t, 0, 8)));
+    const mv = easeInOut(seg(t, 3.8, 5.4));
+    g.position.set(lerp(0, 1.6, mv) + out * 7, lerp(1.6, 2.8, mv) + out * 9, lerp(0, -5, mv) - out * 6);
+    g.visible = m.uOpacity.value > 0.001;
+  }
+  // RING: 8–12.4s
+  {
+    const m = ring.mat.uniforms; m.uTime.value = t;
+    m.uReveal.value = lerp(0, 1.08, easeInOut(seg(t, 8.0, 10.4)));
+    m.uOpacity.value = 1 - easeInOut(seg(t, 11.7, 12.4));
+    ringGrp.rotation.set(0.28 + Math.sin(t * 0.5) * 0.08, Math.sin(t * 0.35) * 0.22, -t * 0.12);
+    ringGrp.position.set(0, -0.2, lerp(-3, 0, easeOut(seg(t, 8, 10))));
+    ringGrp.visible = t > 7.9 && t < 12.5;
+  }
+  // BROWS (woman/man): 12.2–16.2s
+  {
+    for (const [b, grp, delay, dx] of [[bw, browW, 0, -1], [bm, browM, 0.45, 1]]) {
+      const m = b.mat.uniforms; m.uTime.value = t;
+      m.uReveal.value = lerp(0, 1.1, easeInOut(seg(t, 12.3 + delay, 14.6 + delay)));
+      m.uOpacity.value = 1 - easeInOut(seg(t, 15.6, 16.3));
+      grp.rotation.set(Math.sin(t * 0.5) * 0.12, dx * lerp(0.5, 0.12, easeOut(seg(t, 12.2, 15))) + Math.sin(t * 0.4) * 0.05, 0);
+      grp.visible = t > 12.1 && t < 16.4;
+    }
+  }
+  // LOOSE STROKES: 15.8–20.8s
+  {
+    const m = loose.mat.uniforms; m.uTime.value = t;
+    m.uReveal.value = lerp(0, 1.2, easeInOut(seg(t, 15.8, 17.8)));
+    m.uOpacity.value = 0.75 * (1 - easeInOut(seg(t, 20.0, 20.9)));
+    loose.mesh.rotation.set(0, t * 0.04, 0);
+    loose.mesh.position.set(0, (t - 16) * 0.35, 0);
+    loose.mesh.visible = t > 15.7 && t < 21;
+  }
+  // PARTICLES (dust always, converge 20.6–23.2)
+  {
+    const m = parts.mat.uniforms; m.uTime.value = t;
+    m.uConv.value = easeOut(seg(t, 20.3, 22.6));
+    m.uOpacity.value = lerp(1, 0.35, easeInOut(seg(t, 23.2, 24.4)));
+    parts.pts.rotation.set(0, 0, 0);
+  }
+  // CTA BROW: strokes fade in as particles settle
+  {
+    const m = cb.mat.uniforms; m.uTime.value = t;
+    m.uReveal.value = lerp(0, 1.3, easeInOut(seg(t, 21.3, 23.4)));
+    m.uOpacity.value = 1;
+    browC.rotation.set(Math.sin(t * 0.5) * 0.08, Math.sin(t * 0.4) * 0.06, 0);
+    browC.visible = t > 21.2;
+  }
+
+  // ---- text ----
+  show($("#brand"), t, 0.9, 4.0, { dur: 1.6, ls: [0.7, 0.34] });
+  $("#brand .name").style.letterSpacing = lerp(0.62, 0.34, easeOut(seg(t, 0.9, 3.4))) + "em";
+  $("#brand .rule").style.transform = `scaleX(${easeOut(seg(t, 2.0, 3.0))})`;
+
+  show($("#topmark"), t, 4.2, 24.9, { dur: 1.2, y: 0, blur: 6 });
+  show($("#botmark"), t, 4.4, 20.2, { dur: 1.2, y: 0, blur: 6 });
+
+  show($("#casting .big"), t, 4.3, 8.0, { dur: 1.4, y: 70, blur: 16 });
+  show($("#casting .sub"), t, 5.2, 8.0, { dur: 1.2 });
+
+  show($("#promo .l1"), t, 8.5, 12.1, { dur: 1.2 });
+  show($("#promo .l2"), t, 9.7, 12.1, { dur: 1.1 });
+  show($("#promo .l3"), t, 10.4, 12.1, { dur: 1.3, y: 50, blur: 14 });
+
+  show($("#two-title"), t, 12.4, 16.1, { dur: 1.2 });
+  show($("#who-w"), t, 13.8, 16.1, { dur: 1.0 });
+  show($("#who-m"), t, 14.3, 16.1, { dur: 1.0 });
+
+  show($("#req-title"), t, 16.3, 20.6, { dur: 1.2 });
+  show($("#card"), t, 16.7, 20.6, { dur: 1.2, y: 60, blur: 0, scale: 0.97 });
+  show($("#r1"), t, 17.3, 20.6, { dur: 0.9, y: 24 });
+  show($("#r2"), t, 17.9, 20.6, { dur: 0.9, y: 24 });
+  show($("#r3"), t, 18.5, 20.6, { dur: 0.9, y: 24 });
+  show($("#req-foot"), t, 19.0, 20.6, { dur: 1.0 });
+
+  show($("#cta .apply"), t, 21.9, 99, { dur: 1.3, y: 50, blur: 14 });
+  show($("#cta .handle"), t, 22.5, 99, { dur: 1.1, y: 30, scale: 0.94 });
+  show($("#cta .note"), t, 23.1, 99, { dur: 1.0 });
+
+  grain(frame);
+  renderer.render(scene, camera);
+}
+
+window.renderAt = renderAt;
+window.DURATION = DURATION;
+await document.fonts.ready;
+await Promise.all([...document.fonts].map(f => f.load().catch(() => {})));
+renderAt(Number(new URLSearchParams(location.search).get("t") ?? 0));
+window.READY = true;
+</script>
+</body>
+</html>
