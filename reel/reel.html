@@ -136,6 +136,37 @@
   #cta .handle svg { width: 46px; height: 46px; }
   #cta .note { margin-top: 48px; font-family: var(--sans); font-size: 30px; letter-spacing: .08em; color: var(--muted); }
   html[lang="ko"] #cta .note { font-size: 32px; letter-spacing: .02em; }
+  /* 0 · hook */
+  #hook { position: absolute; inset: 0; overflow: hidden; background: #0b0a09; }
+  .hb { position: absolute; inset: 0; overflow: hidden; }
+  .hb .ph { position: absolute; inset: 0; background-repeat: no-repeat; will-change: transform; }
+  .hb .wipe { position: absolute; top: 0; bottom: 0; width: 6px; margin-left: -3px;
+    background: linear-gradient(#f6e5c4, #c9a46e); box-shadow: 0 0 40px 10px rgba(240,215,170,.55); }
+  .hb .chip { position: absolute; left: 70px; top: 1300px; padding: 14px 26px 13px 32px; background: rgba(10,8,6,.66);
+    color: var(--champagne); font-family: "Jost", "NotoSansKR"; font-size: 30px; letter-spacing: .32em; text-transform: uppercase; }
+  html[lang="ko"] .hb .chip { letter-spacing: .12em; font-size: 34px; padding: 12px 28px; }
+  #hook .shade { position: absolute; left: 0; right: 0; top: 0; height: 760px;
+    background: linear-gradient(rgba(8,7,6,.86) 0%, rgba(8,7,6,.6) 55%, rgba(8,7,6,0) 100%); }
+  #hook .shade2 { position: absolute; left: 0; right: 0; bottom: 0; height: 500px;
+    background: linear-gradient(rgba(8,7,6,0), rgba(8,7,6,.55)); }
+  #hook .head { position: absolute; left: 0; right: 0; top: 230px; text-align: center; }
+  #hook .head .k { font-family: "Jost", "NotoSansKR"; font-size: 28px; letter-spacing: .4em; padding-left: .4em; color: var(--beige); text-transform: uppercase; }
+  #hook .head .big { margin-top: 20px; font-family: var(--serif); font-weight: 500; font-size: 150px; line-height: .98; color: #fff7ea; text-shadow: 0 6px 40px rgba(0,0,0,.5); }
+  #hook .head .big i { font-style: italic; font-weight: 400; color: var(--champagne); }
+  html[lang="ko"] #hook .head .k { letter-spacing: .2em; font-size: 32px; }
+  html[lang="ko"] #hook .head .big { font-family: "NotoSerifKR"; font-weight: 500; font-size: 118px; line-height: 1.25; }
+  #flash { position: absolute; inset: 0; background: #f4e6cc; opacity: 0; }
+  #price { position: absolute; inset: 0; }
+  #price .bg { position: absolute; inset: -60px; background-repeat: no-repeat; filter: blur(26px) brightness(.32) saturate(.8); }
+  #price .wrap { position: absolute; left: 0; right: 0; top: 640px; text-align: center; }
+  #price .val { position: relative; display: inline-block; font-family: "Cormorant"; font-weight: 400; font-size: 250px; line-height: 1; color: #f3ece1; }
+  #price .strike { position: absolute; left: -4%; top: 52%; height: 10px; width: 108%; background: linear-gradient(90deg, #f6e5c4, #c9a46e);
+    box-shadow: 0 0 30px rgba(240,215,170,.6); transform-origin: left center; transform: rotate(-8deg) scaleX(0); }
+  #price .free { margin-top: 30px; font-family: "Cormorant"; font-style: italic; font-weight: 500; font-size: 300px; line-height: 1; color: var(--champagne);
+    text-shadow: 0 0 60px rgba(240,215,170,.35); }
+  html[lang="ko"] #price .free { font-family: "NotoSerifKR"; font-style: normal; font-weight: 500; font-size: 210px; line-height: 1.2; }
+  #price .sub { margin-top: 40px; font-family: var(--serif); font-size: 50px; line-height: 1.35; color: #e9dfcf; }
+  html[lang="ko"] #price .sub { font-size: 44px; line-height: 1.55; }
 </style>
 </head>
 <body>
@@ -220,6 +251,24 @@
     </div>
   </div>
 
+  <div id="hook">
+    <div class="hb" id="hb1">
+      <div class="ph before"></div><div class="ph after"></div><div class="wipe"></div>
+      <div class="chip" data-i18n="before"></div>
+    </div>
+    <div class="hb" id="hb2">
+      <div class="ph before"></div><div class="ph after"></div><div class="wipe"></div>
+      <div class="chip" data-i18n="before"></div>
+    </div>
+    <div class="shade"></div><div class="shade2"></div>
+    <div class="head"><div class="k" data-i18n="hookK"></div><div class="big" data-i18n="hookBig"></div></div>
+    <div id="price">
+      <div class="bg"></div>
+      <div class="wrap"><div class="val">$750<span class="strike"></span></div><div class="free" data-i18n="hookFree"></div><div class="sub" data-i18n="hookSub"></div></div>
+    </div>
+    <div id="flash"></div>
+  </div>
+
   <canvas id="grain" width="540" height="960"></canvas>
 </div>
 
@@ -236,6 +285,10 @@ const COPY = {
     promo1: "We don’t do promotions.",
     promo2: "So if you’ve been waiting for one,",
     promo3: "this is it.",
+    hookK: "J-LUNA BROWS · Model casting",
+    hookBig: "Free brows<br><i>for 2 models</i>",
+    hookFree: "Free",
+    hookSub: "First session + 2-month touch-up",
     benefitEb: "Model benefit",
     benefitBig: "Free",
     benefitDet: "Your first session + touch-up<br>within 2 months, fully covered",
@@ -261,6 +314,10 @@ const COPY = {
     promo1: "제이루나 브로우는<br>프로모션을 하지 않습니다.",
     promo2: "그동안 기다려 오셨다면,",
     promo3: "지금이 기회예요.",
+    hookK: "J-LUNA BROWS · 모델 모집",
+    hookBig: "눈썹 시술<br>전액 무료",
+    hookFree: "무료",
+    hookSub: "첫 시술 + 2개월 이내 터치업까지",
     benefitEb: "모델 혜택",
     benefitBig: "전액 무료",
     benefitDet: "첫 시술 + 2개월 이내 터치업까지<br>모두 무료로 해드려요",
@@ -585,6 +642,69 @@ function photoCard(el, t, tin, tout, dir) {
   who.style.opacity = w.toFixed(3); who.style.transform = `translateY(${((1 - w) * 24).toFixed(1)}px)`;
 }
 
+// ---------- hook (0–4.2s) ----------
+// photo crops in source pixels; S = scale, (cx, cy) = source point placed at screen (540, 980)
+function placeBg(el, url, srcW, srcH, S, cx, cy) {
+  el.style.backgroundImage = `url(${url})`;
+  el.style.backgroundSize = `${srcW * S}px ${srcH * S}px`;
+  el.style.backgroundPosition = `${540 - cx * S}px ${980 - cy * S}px`;
+}
+const hb1 = $("#hb1"), hb2 = $("#hb2");
+placeBg(hb1.querySelector(".before"), "img/woman_ba_rot.jpg", 2060, 2576, 1.55, 1160, 1935);
+placeBg(hb1.querySelector(".after"),  "img/woman_ba_rot.jpg", 2060, 2576, 1.55, 1180, 640);
+placeBg(hb2.querySelector(".before"), "img/man_ba.jpg", 1448, 2576, 1.49, 362, 1000);
+placeBg(hb2.querySelector(".after"),  "img/man_ba.jpg", 1448, 2576, 1.49, 1086, 1000);
+placeBg($("#price .bg"), "img/woman_ba_rot.jpg", 2060, 2576, 1.55, 1180, 640);
+function hookBeat(el, t, t0, t1, wipeAt) {
+  const on = t >= t0 && t < t1;
+  el.style.visibility = on ? "visible" : "hidden";
+  if (!on) return;
+  const punch = easeOut(seg(t, t0, t0 + 0.45));
+  const drift = seg(t, t0, t1);
+  const sc = lerp(1.18, 1.04, punch) - drift * 0.04;
+  for (const ph of el.querySelectorAll(".ph")) ph.style.transform = `scale(${sc.toFixed(4)}) rotate(${lerp(-1.2, 0, punch).toFixed(3)}deg)`;
+  const w = easeInOut(seg(t, wipeAt, wipeAt + 0.5));
+  el.querySelector(".after").style.clipPath = `inset(0 ${((1 - w) * 100).toFixed(2)}% 0 0)`;
+  const wl = el.querySelector(".wipe");
+  wl.style.left = `${(w * 1080).toFixed(1)}px`;
+  wl.style.opacity = (w > 0 && w < 1 ? 1 : 0).toString();
+  el.querySelector(".chip").innerHTML = COPY[w > 0.5 ? "after" : "before"];
+}
+function hook(t) {
+  const H = $("#hook");
+  const out = easeInOut(seg(t, 3.85, 4.3));
+  H.style.visibility = t < 4.3 ? "visible" : "hidden";
+  H.style.opacity = (1 - out).toFixed(4);
+  if (t >= 4.3) return;
+  hookBeat(hb1, t, 0, 1.5, 0.45);
+  hookBeat(hb2, t, 1.5, 2.95, 1.9);
+  // headline: on screen from frame 0, tiny settle
+  const hd = $("#hook .head"), hv = t < 2.95;
+  hd.style.visibility = hv ? "visible" : "hidden";
+  hd.style.transform = `scale(${lerp(1.06, 1, easeOut(seg(t, 0, 0.5))).toFixed(4)})`;
+  $("#hook .shade").style.visibility = hv ? "visible" : "hidden";
+  // flash cuts
+  const f = Math.max(1 - seg(t, 1.5, 1.68), 0) * (t >= 1.5 ? 1 : 0) * 0.85 + Math.max(1 - seg(t, 2.95, 3.12), 0) * (t >= 2.95 ? 1 : 0) * 0.85;
+  $("#flash").style.opacity = f.toFixed(3);
+  // price beat
+  const P = $("#price"), pv = t >= 2.95;
+  P.style.visibility = pv ? "visible" : "hidden";
+  if (pv) {
+    const a = easeOut(seg(t, 2.95, 3.2));
+    $("#price .val").style.transform = `scale(${lerp(1.25, 1, a).toFixed(4)})`;
+    $("#price .val").style.opacity = lerp(1, 0.45, easeOut(seg(t, 3.25, 3.5))).toFixed(3);
+    $("#price .strike").style.transform = `rotate(-8deg) scaleX(${easeOut(seg(t, 3.12, 3.32)).toFixed(4)})`;
+    const fr = seg(t, 3.3, 3.6);
+    const pop = fr < 1 ? 1 + 0.35 * Math.sin(Math.PI * fr) * (1 - fr) : 1;
+    const fe = $("#price .free");
+    fe.style.opacity = easeOut(fr).toFixed(3);
+    fe.style.transform = `scale(${(lerp(0.6, 1, easeOut(fr)) * pop).toFixed(4)})`;
+    const sb = $("#price .sub"); const so = easeOut(seg(t, 3.5, 3.8));
+    sb.style.opacity = so.toFixed(3); sb.style.transform = `translateY(${((1 - so) * 20).toFixed(1)}px)`;
+    $("#price .bg").style.transform = `scale(${lerp(1.0, 1.08, seg(t, 2.95, 4.3)).toFixed(4)})`;
+  }
+}
+
 // grain
 const gctx = $("#grain").getContext("2d");
 const gimg = gctx.createImageData(540, 960);
@@ -654,10 +774,9 @@ function renderAt(t, frame = 0) {
     browC.visible = t > 32.5;
   }
 
+  hook(t);
   // ---- text ----
-  show($("#brand"), t, 0.9, 4.0, { dur: 1.6, ls: [0.7, 0.34] });
-  $("#brand .name").style.letterSpacing = lerp(0.62, 0.34, easeOut(seg(t, 0.9, 3.4))) + "em";
-  $("#brand .rule").style.transform = `scaleX(${easeOut(seg(t, 2.0, 3.0))})`;
+  $("#brand").style.visibility = "hidden";
 
   show($("#topmark"), t, 4.2, 99, { dur: 1.2, y: 0, blur: 6 });
   if (t < 12.15) show($("#botmark"), t, 4.4, 12.1, { dur: 1.2, y: 0, blur: 6 });
