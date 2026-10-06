@@ -87,25 +87,33 @@
   .who .num { font-family: "Cormorant"; font-style: italic; font-size: 56px; color: var(--beige); display: block; line-height: 1; }
   .who .lab { display: block; margin-top: 12px; font-size: 30px; letter-spacing: .38em; padding-left: .38em; text-transform: uppercase; color: var(--text); font-weight: 400; }
   html[lang="ko"] .who .lab { letter-spacing: .2em; font-size: 36px; }
-  #who-w { top: 850px; }
-  #who-m { top: 1395px; }
+  .pcard { position: absolute; left: 0; right: 0; top: 0; bottom: 0; perspective: 2200px; }
+  .pframe { position: absolute; left: 120px; right: 120px; top: 470px; height: 1060px; overflow: hidden;
+    box-shadow: 0 50px 140px rgba(0,0,0,.6); transform-style: preserve-3d; background: #000; }
+  .pframe img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .pframe .line { position: absolute; inset: 22px; border: 1px solid rgba(255,240,215,.45); pointer-events: none; }
+  .pframe .sheen { position: absolute; top: -20%; bottom: -20%; width: 40%; left: 0;
+    background: linear-gradient(100deg, rgba(255,240,215,0) 0%, rgba(255,240,215,.16) 50%, rgba(255,240,215,0) 100%); mix-blend-mode: screen; }
+  .pcard .who { position: absolute; left: 0; right: 0; top: 1580px; text-align: center; }
+  #pc-w img { object-position: 50% 30%; }
+  #pc-m img { object-position: 45% 30%; }
 
   /* 5 · requirements */
-  #req-title { top: 330px; }
+  #req-title { top: 290px; }
   #req-title .t { font-family: var(--serif); font-weight: 300; font-size: 104px; line-height: 1.1; }
   #req-title .t i { font-style: italic; color: var(--champagne); }
   html[lang="ko"] #req-title .t { font-size: 80px; line-height: 1.3; }
-  #card { position: absolute; left: 90px; right: 90px; top: 640px; padding: 30px 64px;
+  #card { position: absolute; left: 80px; right: 80px; top: 590px; padding: 22px 60px;
     border: 1px solid rgba(220,198,166,.35); border-radius: 4px;
     background: linear-gradient(160deg, rgba(40,33,26,.55), rgba(16,13,10,.45));
     backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
     box-shadow: 0 40px 120px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,240,215,.08); }
-  .req { display: flex; gap: 38px; align-items: baseline; padding: 46px 0; border-bottom: 1px solid rgba(220,198,166,.18); }
+  .req { display: flex; gap: 34px; align-items: baseline; padding: 36px 0; border-bottom: 1px solid rgba(220,198,166,.18); }
   .req:last-child { border-bottom: 0; }
   .req .n { font-family: "Cormorant"; font-style: italic; font-size: 54px; color: var(--beige); min-width: 64px; }
-  .req .txt { font-family: var(--serif); font-weight: 400; font-size: 52px; line-height: 1.25; text-align: left; }
-  html[lang="ko"] .req .txt { font-family: "NotoSerifKR"; font-size: 42px; line-height: 1.5; font-weight: 400; }
-  #req-foot { top: 1500px; }
+  .req .txt { font-family: var(--serif); font-weight: 400; font-size: 49px; line-height: 1.25; text-align: left; text-wrap: balance; }
+  html[lang="ko"] .req .txt { font-family: "NotoSerifKR"; font-size: 40px; line-height: 1.5; font-weight: 400; }
+  #req-foot { top: 1560px; }
 
   /* 6 · CTA */
   #cta { top: 1040px; }
@@ -153,8 +161,14 @@
 
     <!-- 4 -->
     <div class="abs" id="two-title"><div class="t" data-i18n="twoTitle"></div></div>
-    <div class="abs who" id="who-w"><span class="num">01</span><span class="lab" data-i18n="woman"></span></div>
-    <div class="abs who" id="who-m"><span class="num">01</span><span class="lab" data-i18n="man"></span></div>
+    <div class="pcard" id="pc-w">
+      <div class="pframe"><img src="img/woman_web.jpg" alt=""><div class="sheen"></div><div class="line"></div></div>
+      <div class="who"><span class="num">01</span><span class="lab" data-i18n="woman"></span></div>
+    </div>
+    <div class="pcard" id="pc-m">
+      <div class="pframe"><img src="img/man_web.jpg" alt=""><div class="sheen"></div><div class="line"></div></div>
+      <div class="who"><span class="num">01</span><span class="lab" data-i18n="man"></span></div>
+    </div>
 
     <!-- 5 -->
     <div class="abs" id="req-title"><div class="t" data-i18n="reqTitle"></div></div>
@@ -162,6 +176,7 @@
       <div class="req" id="r1"><span class="n">01</span><span class="txt" data-i18n="req1"></span></div>
       <div class="req" id="r2"><span class="n">02</span><span class="txt" data-i18n="req2"></span></div>
       <div class="req" id="r3"><span class="n">03</span><span class="txt" data-i18n="req3"></span></div>
+      <div class="req" id="r4"><span class="n">04</span><span class="txt" data-i18n="req4"></span></div>
     </div>
     <div class="abs eyebrow ko-sans" id="req-foot" data-i18n="reqFoot"></div>
 
@@ -199,6 +214,7 @@ const COPY = {
     req1: "Comfortable showing your face",
     req2: "Happy to join the photo &amp; video shoot",
     req3: "No previous brow tattoo or PMU residue",
+    req4: "Okay with your photos &amp; videos being shared on social media",
     reqFoot: "One woman · One man",
     apply: "Apply by <i>DM</i>",
     ctaNote: "Only two spots. Send us a message.",
@@ -214,8 +230,9 @@ const COPY = {
     man: "남성",
     reqTitle: "이런 분을 찾아요",
     req1: "얼굴 공개가 부담 없으신 분",
-    req2: "사진·영상 촬영에 협조해 주실 수 있는 분",
+    req2: "사진·영상 촬영에 협조 가능하신 분",
     req3: "기존 반영구 잔흔이 없는 분",
+    req4: "사진·영상 SNS 게시에 동의하시는 분",
     reqFoot: "여성 1분 · 남성 1분",
     apply: "인스타 DM으로<br>신청해 주세요",
     ctaNote: "딱 두 분만 모십니다.",
@@ -472,19 +489,28 @@ function makeParticles(targetStrokes, browOffset) {
 const feather = makeFeather(); feather.grp.scale.setScalar(0.8); scene.add(feather.grp);
 const ring = makeRing(); const ringGrp = new THREE.Group(); ringGrp.add(ring.mesh); scene.add(ringGrp);
 
-const wStrokes = makeBrow({ arch: 0.13, peakAt: 0.64, thick: 0.13, tailDrop: 0.05, count: 300, seed: 11, width: 5.5 });
-const mStrokes = makeBrow({ arch: 0.045, peakAt: 0.7, thick: 0.17, tailDrop: 0.03, count: 400, seed: 12, width: 5.7 });
-const bw = browMesh(wStrokes), bm = browMesh(mStrokes);
-const browW = new THREE.Group(); browW.add(bw.mesh); browW.position.set(0, 2.55, 0); scene.add(browW);
-const browM = new THREE.Group(); browM.add(bm.mesh); browM.position.set(0, -1.45, 0); scene.add(browM);
 
 const loose = makeLoose(); scene.add(loose.mesh);
 
-const ctaStrokes = makeBrow({ arch: 0.1, peakAt: 0.66, thick: 0.15, tailDrop: 0.04, count: 420, seed: 31, width: 5.9 });
-const ctaOffset = new THREE.Vector3(0, 2.6, 0);
-const cb = browMesh(ctaStrokes, 0.25);
-const browC = new THREE.Group(); browC.add(cb.mesh); browC.position.copy(ctaOffset); scene.add(browC);
-const parts = makeParticles(ctaStrokes, ctaOffset); scene.add(parts.pts);
+// real brow traced from the studio photo (gold hair-stroke mask)
+const browData = await (await fetch("img/brow_pts.json")).json();
+const browTex = await new THREE.TextureLoader().loadAsync("img/brow_gold.png");
+browTex.colorSpace = THREE.SRGBColorSpace; browTex.anisotropy = 4;
+const BW = 7.2, BH = BW / browData.aspect;
+const ctaOffset = new THREE.Vector3(0, 2.7, 0);
+const browMat = new THREE.ShaderMaterial({
+  uniforms: { uMap: { value: browTex }, uReveal: { value: 0 }, uOpacity: { value: 1 } },
+  vertexShader: `varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
+  fragmentShader: `uniform sampler2D uMap; uniform float uReveal; uniform float uOpacity; varying vec2 vUv;
+    void main(){ vec4 c = texture2D(uMap, vUv); float w = 1.0 - smoothstep(uReveal - 0.18, uReveal, vUv.x);
+      float a = c.a * w * uOpacity; gl_FragColor = vec4(c.rgb * a, a); }`,
+  transparent: true, depthWrite: false, depthTest: false,
+  blending: THREE.CustomBlending, blendEquation: THREE.AddEquation, blendSrc: THREE.OneFactor, blendDst: THREE.OneMinusSrcAlphaFactor,
+});
+const browC = new THREE.Mesh(new THREE.PlaneGeometry(BW, BH), browMat);
+browC.position.copy(ctaOffset); scene.add(browC);
+const browTargets = [{ pts: browData.pts.map(([u, v]) => new THREE.Vector3((u - 0.5) * BW, (0.5 - v) * BH, 0)) }];
+const parts = makeParticles(browTargets, ctaOffset); scene.add(parts.pts);
 
 // ---------- DOM animation helpers ----------
 const $ = s => document.querySelector(s);
@@ -500,6 +526,22 @@ function show(el, t, tin, tout, o = {}) {
   el.style.visibility = a <= 0.001 ? "hidden" : "visible";
 }
 
+function photoCard(el, t, tin, tout, dir) {
+  const p = easeOut(seg(t, tin, tin + 1.2)), q = 1 - easeInOut(seg(t, tout - 0.6, tout));
+  const a = p * q, frame = el.querySelector(".pframe"), img = el.querySelector("img");
+  el.style.visibility = a <= 0.001 ? "hidden" : "visible";
+  el.style.opacity = a.toFixed(4);
+  const k = seg(t, tin, tout);
+  frame.style.transform = `translateZ(${((1 - p) * -260 + (1 - q) * 120).toFixed(1)}px) rotateY(${(dir * lerp(16, -3, easeOut(k)) - (1 - q) * dir * 10).toFixed(2)}deg) rotateX(${lerp(4, -1, k).toFixed(2)}deg)`;
+  frame.style.filter = `blur(${((1 - p) * 12 + (1 - q) * 10).toFixed(2)}px)`;
+  img.style.transform = `scale(${lerp(1.16, 1.03, easeInOut(k)).toFixed(4)}) translateY(${lerp(30, 0, k).toFixed(1)}px)`;
+  img.style.transformOrigin = "50% 30%";
+  const sh = el.querySelector(".sheen");
+  sh.style.transform = `translateX(${lerp(-1300, 2600, easeInOut(seg(t, tin + 0.9, tin + 2.4))).toFixed(0)}px) skewX(-12deg)`;
+  const who = el.querySelector(".who"), w = easeOut(seg(t, tin + 0.7, tin + 1.6));
+  who.style.opacity = w.toFixed(3); who.style.transform = `translateY(${((1 - w) * 24).toFixed(1)}px)`;
+}
+
 // grain
 const gctx = $("#grain").getContext("2d");
 const gimg = gctx.createImageData(540, 960);
@@ -510,7 +552,7 @@ function grain(frame) {
 }
 
 // ---------- timeline ----------
-const DURATION = 25;
+const DURATION = 27;
 function renderAt(t, frame = 0) {
   // background warmth drift
   const warm = $("#warm");
@@ -542,39 +584,29 @@ function renderAt(t, frame = 0) {
     ringGrp.position.set(0, -0.2, lerp(-3, 0, easeOut(seg(t, 8, 10))));
     ringGrp.visible = t > 7.9 && t < 12.5;
   }
-  // BROWS (woman/man): 12.2–16.2s
-  {
-    for (const [b, grp, delay, dx] of [[bw, browW, 0, -1], [bm, browM, 0.45, 1]]) {
-      const m = b.mat.uniforms; m.uTime.value = t;
-      m.uReveal.value = lerp(0, 1.1, easeInOut(seg(t, 12.3 + delay, 14.6 + delay)));
-      m.uOpacity.value = 1 - easeInOut(seg(t, 15.6, 16.3));
-      grp.rotation.set(Math.sin(t * 0.5) * 0.12, dx * lerp(0.5, 0.12, easeOut(seg(t, 12.2, 15))) + Math.sin(t * 0.4) * 0.05, 0);
-      grp.visible = t > 12.1 && t < 16.4;
-    }
-  }
-  // LOOSE STROKES: 15.8–20.8s
+  // PHOTO CARDS (woman 12.4–15.6, man 15.1–18.2)
+  photoCard($("#pc-w"), t, 12.4, 15.6, 1);
+  photoCard($("#pc-m"), t, 15.1, 18.2, -1);
+  // LOOSE STROKES: 17.8–22.9s
   {
     const m = loose.mat.uniforms; m.uTime.value = t;
-    m.uReveal.value = lerp(0, 1.2, easeInOut(seg(t, 15.8, 17.8)));
-    m.uOpacity.value = 0.75 * (1 - easeInOut(seg(t, 20.0, 20.9)));
+    m.uReveal.value = lerp(0, 1.2, easeInOut(seg(t, 17.8, 19.8)));
+    m.uOpacity.value = 0.75 * (1 - easeInOut(seg(t, 22.0, 22.9)));
     loose.mesh.rotation.set(0, t * 0.04, 0);
-    loose.mesh.position.set(0, (t - 16) * 0.35, 0);
-    loose.mesh.visible = t > 15.7 && t < 21;
+    loose.mesh.position.set(0, (t - 18) * 0.35, 0);
+    loose.mesh.visible = t > 17.7 && t < 23;
   }
-  // PARTICLES (dust always, converge 20.6–23.2)
+  // PARTICLES (dust always, converge into the real brow 22.3–24.6)
   {
     const m = parts.mat.uniforms; m.uTime.value = t;
-    m.uConv.value = easeOut(seg(t, 20.3, 22.6));
-    m.uOpacity.value = lerp(1, 0.35, easeInOut(seg(t, 23.2, 24.4)));
-    parts.pts.rotation.set(0, 0, 0);
+    m.uConv.value = easeOut(seg(t, 22.3, 24.6));
+    m.uOpacity.value = lerp(1, 0.3, easeInOut(seg(t, 24.6, 25.8)));
   }
-  // CTA BROW: strokes fade in as particles settle
+  // CTA BROW: real hair strokes wipe in head→tail as particles settle
   {
-    const m = cb.mat.uniforms; m.uTime.value = t;
-    m.uReveal.value = lerp(0, 1.3, easeInOut(seg(t, 21.3, 23.4)));
-    m.uOpacity.value = 1;
-    browC.rotation.set(Math.sin(t * 0.5) * 0.08, Math.sin(t * 0.4) * 0.06, 0);
-    browC.visible = t > 21.2;
+    browMat.uniforms.uReveal.value = lerp(-0.05, 1.25, easeInOut(seg(t, 23.3, 25.4)));
+    browC.rotation.set(Math.sin(t * 0.5) * 0.06, Math.sin(t * 0.4) * 0.08, 0);
+    browC.visible = t > 23.2;
   }
 
   // ---- text ----
@@ -582,8 +614,9 @@ function renderAt(t, frame = 0) {
   $("#brand .name").style.letterSpacing = lerp(0.62, 0.34, easeOut(seg(t, 0.9, 3.4))) + "em";
   $("#brand .rule").style.transform = `scaleX(${easeOut(seg(t, 2.0, 3.0))})`;
 
-  show($("#topmark"), t, 4.2, 24.9, { dur: 1.2, y: 0, blur: 6 });
-  show($("#botmark"), t, 4.4, 20.2, { dur: 1.2, y: 0, blur: 6 });
+  show($("#topmark"), t, 4.2, 99, { dur: 1.2, y: 0, blur: 6 });
+  if (t < 12.15) show($("#botmark"), t, 4.4, 12.1, { dur: 1.2, y: 0, blur: 6 });
+  else show($("#botmark"), t, 18.4, 22.2, { dur: 1.0, y: 0, blur: 6 });
 
   show($("#casting .big"), t, 4.3, 8.0, { dur: 1.4, y: 70, blur: 16 });
   show($("#casting .sub"), t, 5.2, 8.0, { dur: 1.2 });
@@ -592,20 +625,19 @@ function renderAt(t, frame = 0) {
   show($("#promo .l2"), t, 9.7, 12.1, { dur: 1.1 });
   show($("#promo .l3"), t, 10.4, 12.1, { dur: 1.3, y: 50, blur: 14 });
 
-  show($("#two-title"), t, 12.4, 16.1, { dur: 1.2 });
-  show($("#who-w"), t, 13.8, 16.1, { dur: 1.0 });
-  show($("#who-m"), t, 14.3, 16.1, { dur: 1.0 });
+  show($("#two-title"), t, 12.3, 18.1, { dur: 1.2 });
 
-  show($("#req-title"), t, 16.3, 20.6, { dur: 1.2 });
-  show($("#card"), t, 16.7, 20.6, { dur: 1.2, y: 60, blur: 0, scale: 0.97 });
-  show($("#r1"), t, 17.3, 20.6, { dur: 0.9, y: 24 });
-  show($("#r2"), t, 17.9, 20.6, { dur: 0.9, y: 24 });
-  show($("#r3"), t, 18.5, 20.6, { dur: 0.9, y: 24 });
-  show($("#req-foot"), t, 19.0, 20.6, { dur: 1.0 });
+  show($("#req-title"), t, 18.2, 22.6, { dur: 1.2 });
+  show($("#card"), t, 18.5, 22.6, { dur: 1.2, y: 60, blur: 0, scale: 0.97 });
+  show($("#r1"), t, 19.0, 22.6, { dur: 0.9, y: 24 });
+  show($("#r2"), t, 19.5, 22.6, { dur: 0.9, y: 24 });
+  show($("#r3"), t, 20.0, 22.6, { dur: 0.9, y: 24 });
+  show($("#r4"), t, 20.5, 22.6, { dur: 0.9, y: 24 });
+  show($("#req-foot"), t, 21.0, 22.6, { dur: 1.0 });
 
-  show($("#cta .apply"), t, 21.9, 99, { dur: 1.3, y: 50, blur: 14 });
-  show($("#cta .handle"), t, 22.5, 99, { dur: 1.1, y: 30, scale: 0.94 });
-  show($("#cta .note"), t, 23.1, 99, { dur: 1.0 });
+  show($("#cta .apply"), t, 23.9, 99, { dur: 1.3, y: 50, blur: 14 });
+  show($("#cta .handle"), t, 24.5, 99, { dur: 1.1, y: 30, scale: 0.94 });
+  show($("#cta .note"), t, 25.1, 99, { dur: 1.0 });
 
   grain(frame);
   renderer.render(scene, camera);
@@ -614,6 +646,7 @@ function renderAt(t, frame = 0) {
 window.renderAt = renderAt;
 window.DURATION = DURATION;
 await document.fonts.ready;
+await Promise.all([...document.images].map(i => i.decode().catch(() => {})));
 await Promise.all([...document.fonts].map(f => f.load().catch(() => {})));
 renderAt(Number(new URLSearchParams(location.search).get("t") ?? 0));
 window.READY = true;

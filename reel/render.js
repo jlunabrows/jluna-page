@@ -1,7 +1,7 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
 (async () => {
-  const lang = process.argv[2], FPS = 30, DUR = 25, dir = `frames-${lang}`;
+  const lang = process.argv[2], FPS = 30, DUR = 27, dir = `frames-${lang}`;
   fs.mkdirSync(dir, { recursive: true });
   const b = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
   const p = await b.newPage({ viewport: { width: 1080, height: 1920 } });
