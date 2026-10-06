@@ -33,7 +33,7 @@
   html[lang="ko"] { --serif: "Cormorant", "NotoSerifKR", serif; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ink); }
-  body { color: var(--text); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+  body { color: var(--text); font-family: var(--sans); -webkit-font-smoothing: antialiased; font-variant-numeric: lining-nums; }
 
   #stage { position: absolute; inset: 0; overflow: hidden;
     background: radial-gradient(120% 80% at 50% 45%, #1d1813 0%, #120f0c 45%, #080706 100%); }
@@ -88,15 +88,25 @@
   .who .lab { display: block; margin-top: 12px; font-size: 30px; letter-spacing: .38em; padding-left: .38em; text-transform: uppercase; color: var(--text); font-weight: 400; }
   html[lang="ko"] .who .lab { letter-spacing: .2em; font-size: 36px; }
   .pcard { position: absolute; left: 0; right: 0; top: 0; bottom: 0; perspective: 2200px; }
-  .pframe { position: absolute; left: 120px; right: 120px; top: 470px; height: 1060px; overflow: hidden;
+  .pframe { position: absolute; width: var(--w); left: calc(540px - var(--w) / 2); top: 470px; height: 1060px; overflow: hidden;
     box-shadow: 0 50px 140px rgba(0,0,0,.6); transform-style: preserve-3d; background: #000; }
   .pframe img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .pframe .line { position: absolute; inset: 22px; border: 1px solid rgba(255,240,215,.45); pointer-events: none; }
   .pframe .sheen { position: absolute; top: -20%; bottom: -20%; width: 40%; left: 0;
     background: linear-gradient(100deg, rgba(255,240,215,0) 0%, rgba(255,240,215,.16) 50%, rgba(255,240,215,0) 100%); mix-blend-mode: screen; }
   .pcard .who { position: absolute; left: 0; right: 0; top: 1580px; text-align: center; }
-  #pc-w img { object-position: 50% 30%; }
-  #pc-m img { object-position: 45% 30%; }
+  .who .num.kind { font-size: 46px; }
+  html[lang="ko"] .who .num.kind { font-family: "NotoSerifKR"; font-style: normal; font-size: 36px; font-weight: 400; }
+  .ba { position: absolute; padding: 12px 20px 11px 26px; background: rgba(10,8,6,.62); color: var(--champagne);
+    font-family: "Jost", "NotoSansKR"; font-size: 22px; letter-spacing: .32em; text-transform: uppercase; }
+  html[lang="ko"] .ba { letter-spacing: .12em; font-size: 26px; padding: 10px 20px; }
+
+  /* benefit */
+  #benefit { top: 720px; }
+  #benefit .big { margin-top: 26px; font-family: var(--serif); font-weight: 400; font-style: italic; font-size: 230px; line-height: 1; color: var(--champagne); }
+  #benefit .det { margin-top: 40px; font-family: var(--serif); font-weight: 400; font-size: 50px; line-height: 1.3; }
+  html[lang="ko"] #benefit .big { font-style: normal; font-size: 150px; font-weight: 400; line-height: 1.2; }
+  html[lang="ko"] #benefit .det { font-size: 44px; line-height: 1.55; }
 
   /* 5 · requirements */
   #req-title { top: 290px; }
@@ -159,15 +169,34 @@
       <div class="l3" data-i18n="promo3"></div>
     </div>
 
+    <!-- 3b · benefit -->
+    <div class="abs" id="benefit">
+      <div class="eyebrow ko-sans eb" data-i18n="benefitEb"></div>
+      <div class="big" data-i18n="benefitBig"></div>
+      <div class="det" data-i18n="benefitDet"></div>
+    </div>
+
     <!-- 4 -->
     <div class="abs" id="two-title"><div class="t" data-i18n="twoTitle"></div></div>
-    <div class="pcard" id="pc-w">
-      <div class="pframe"><img src="img/woman_web.jpg" alt=""><div class="sheen"></div><div class="line"></div></div>
-      <div class="who"><span class="num">01</span><span class="lab" data-i18n="woman"></span></div>
+    <div class="pcard" id="pc-wd">
+      <div class="pframe" style="--w:848px"><img src="img/woman_web.jpg" alt=""><div class="sheen"></div><div class="line"></div></div>
+      <div class="who"><span class="num kind" data-i18n="design"></span><span class="lab" data-i18n="woman"></span></div>
     </div>
-    <div class="pcard" id="pc-m">
-      <div class="pframe"><img src="img/man_web.jpg" alt=""><div class="sheen"></div><div class="line"></div></div>
-      <div class="who"><span class="num">01</span><span class="lab" data-i18n="man"></span></div>
+    <div class="pcard" id="pc-wr">
+      <div class="pframe" style="--w:848px"><img src="img/woman_ba_web.jpg" alt="">
+        <span class="ba" style="left:44px;top:44px" data-i18n="before"></span><span class="ba" style="left:44px;top:574px" data-i18n="after"></span>
+        <div class="sheen"></div><div class="line"></div></div>
+      <div class="who"><span class="num kind" data-i18n="real"></span><span class="lab" data-i18n="woman"></span></div>
+    </div>
+    <div class="pcard" id="pc-md">
+      <div class="pframe" style="--w:740px"><img src="img/man_web.jpg" alt=""><div class="sheen"></div><div class="line"></div></div>
+      <div class="who"><span class="num kind" data-i18n="design"></span><span class="lab" data-i18n="man"></span></div>
+    </div>
+    <div class="pcard" id="pc-mr">
+      <div class="pframe" style="--w:596px"><img src="img/man_ba_web.jpg" alt="">
+        <span class="ba" style="left:40px;top:44px" data-i18n="before"></span><span class="ba" style="left:318px;top:44px" data-i18n="after"></span>
+        <div class="sheen"></div><div class="line"></div></div>
+      <div class="who"><span class="num kind" data-i18n="real"></span><span class="lab" data-i18n="man"></span></div>
     </div>
 
     <!-- 5 -->
@@ -207,6 +236,13 @@ const COPY = {
     promo1: "We don’t do promotions.",
     promo2: "So if you’ve been waiting for one,",
     promo3: "this is it.",
+    benefitEb: "Model benefit",
+    benefitBig: "Free",
+    benefitDet: "Your first session + touch-up<br>within 2 months, fully covered",
+    design: "Brow design",
+    real: "Real result",
+    before: "Before",
+    after: "After",
     twoTitle: "Looking for <i>two</i> models",
     woman: "Woman",
     man: "Man",
@@ -225,6 +261,13 @@ const COPY = {
     promo1: "제이루나 브로우는<br>프로모션을 하지 않습니다.",
     promo2: "그동안 기다려 오셨다면,",
     promo3: "지금이 기회예요.",
+    benefitEb: "모델 혜택",
+    benefitBig: "전액 무료",
+    benefitDet: "첫 시술 + 2개월 이내 터치업까지<br>모두 무료로 해드려요",
+    design: "눈썹 디자인",
+    real: "실제 시술 전후",
+    before: "시술 전",
+    after: "시술 후",
     twoTitle: "모델 두 분을 모십니다",
     woman: "여성",
     man: "남성",
@@ -552,7 +595,7 @@ function grain(frame) {
 }
 
 // ---------- timeline ----------
-const DURATION = 27;
+const DURATION = 36;
 function renderAt(t, frame = 0) {
   // background warmth drift
   const warm = $("#warm");
@@ -579,34 +622,36 @@ function renderAt(t, frame = 0) {
   {
     const m = ring.mat.uniforms; m.uTime.value = t;
     m.uReveal.value = lerp(0, 1.08, easeInOut(seg(t, 8.0, 10.4)));
-    m.uOpacity.value = 1 - easeInOut(seg(t, 11.7, 12.4));
+    m.uOpacity.value = 1 - easeInOut(seg(t, 14.9, 15.6));
     ringGrp.rotation.set(0.28 + Math.sin(t * 0.5) * 0.08, Math.sin(t * 0.35) * 0.22, -t * 0.12);
     ringGrp.position.set(0, -0.2, lerp(-3, 0, easeOut(seg(t, 8, 10))));
-    ringGrp.visible = t > 7.9 && t < 12.5;
+    ringGrp.visible = t > 7.9 && t < 15.7;
   }
   // PHOTO CARDS (woman 12.4–15.6, man 15.1–18.2)
-  photoCard($("#pc-w"), t, 12.4, 15.6, 1);
-  photoCard($("#pc-m"), t, 15.1, 18.2, -1);
-  // LOOSE STROKES: 17.8–22.9s
+  photoCard($("#pc-wd"), t, 15.6, 18.7, 1);
+  photoCard($("#pc-wr"), t, 18.5, 21.6, -1);
+  photoCard($("#pc-md"), t, 21.4, 24.5, 1);
+  photoCard($("#pc-mr"), t, 24.3, 27.4, -1);
+  // LOOSE STROKES: 27.1–32.2s
   {
     const m = loose.mat.uniforms; m.uTime.value = t;
-    m.uReveal.value = lerp(0, 1.2, easeInOut(seg(t, 17.8, 19.8)));
-    m.uOpacity.value = 0.75 * (1 - easeInOut(seg(t, 22.0, 22.9)));
+    m.uReveal.value = lerp(0, 1.2, easeInOut(seg(t, 27.1, 29.1)));
+    m.uOpacity.value = 0.75 * (1 - easeInOut(seg(t, 31.3, 32.2)));
     loose.mesh.rotation.set(0, t * 0.04, 0);
-    loose.mesh.position.set(0, (t - 18) * 0.35, 0);
-    loose.mesh.visible = t > 17.7 && t < 23;
+    loose.mesh.position.set(0, (t - 27.3) * 0.35, 0);
+    loose.mesh.visible = t > 27.0 && t < 32.3;
   }
-  // PARTICLES (dust always, converge into the real brow 22.3–24.6)
+  // PARTICLES (dust always, converge into the brow 31.6–33.9)
   {
     const m = parts.mat.uniforms; m.uTime.value = t;
-    m.uConv.value = easeOut(seg(t, 22.3, 24.6));
-    m.uOpacity.value = lerp(1, 0.3, easeInOut(seg(t, 24.6, 25.8)));
+    m.uConv.value = easeOut(seg(t, 31.6, 33.9));
+    m.uOpacity.value = lerp(1, 0.3, easeInOut(seg(t, 33.9, 35.1)));
   }
-  // CTA BROW: real hair strokes wipe in head→tail as particles settle
+  // CTA BROW: hair strokes wipe in head→tail as particles settle
   {
-    browMat.uniforms.uReveal.value = lerp(-0.05, 1.25, easeInOut(seg(t, 23.3, 25.4)));
+    browMat.uniforms.uReveal.value = lerp(-0.05, 1.25, easeInOut(seg(t, 32.6, 34.7)));
     browC.rotation.set(Math.sin(t * 0.5) * 0.06, Math.sin(t * 0.4) * 0.08, 0);
-    browC.visible = t > 23.2;
+    browC.visible = t > 32.5;
   }
 
   // ---- text ----
@@ -616,7 +661,7 @@ function renderAt(t, frame = 0) {
 
   show($("#topmark"), t, 4.2, 99, { dur: 1.2, y: 0, blur: 6 });
   if (t < 12.15) show($("#botmark"), t, 4.4, 12.1, { dur: 1.2, y: 0, blur: 6 });
-  else show($("#botmark"), t, 18.4, 22.2, { dur: 1.0, y: 0, blur: 6 });
+  else show($("#botmark"), t, 27.6, 31.5, { dur: 1.0, y: 0, blur: 6 });
 
   show($("#casting .big"), t, 4.3, 8.0, { dur: 1.4, y: 70, blur: 16 });
   show($("#casting .sub"), t, 5.2, 8.0, { dur: 1.2 });
@@ -625,19 +670,23 @@ function renderAt(t, frame = 0) {
   show($("#promo .l2"), t, 9.7, 12.1, { dur: 1.1 });
   show($("#promo .l3"), t, 10.4, 12.1, { dur: 1.3, y: 50, blur: 14 });
 
-  show($("#two-title"), t, 12.3, 18.1, { dur: 1.2 });
+  show($("#benefit .eb"), t, 12.3, 15.4, { dur: 1.0 });
+  show($("#benefit .big"), t, 12.6, 15.4, { dur: 1.4, y: 60, blur: 18, scale: 0.92 });
+  show($("#benefit .det"), t, 13.4, 15.4, { dur: 1.1 });
 
-  show($("#req-title"), t, 18.2, 22.6, { dur: 1.2 });
-  show($("#card"), t, 18.5, 22.6, { dur: 1.2, y: 60, blur: 0, scale: 0.97 });
-  show($("#r1"), t, 19.0, 22.6, { dur: 0.9, y: 24 });
-  show($("#r2"), t, 19.5, 22.6, { dur: 0.9, y: 24 });
-  show($("#r3"), t, 20.0, 22.6, { dur: 0.9, y: 24 });
-  show($("#r4"), t, 20.5, 22.6, { dur: 0.9, y: 24 });
-  show($("#req-foot"), t, 21.0, 22.6, { dur: 1.0 });
+  show($("#two-title"), t, 15.5, 27.4, { dur: 1.2 });
 
-  show($("#cta .apply"), t, 23.9, 99, { dur: 1.3, y: 50, blur: 14 });
-  show($("#cta .handle"), t, 24.5, 99, { dur: 1.1, y: 30, scale: 0.94 });
-  show($("#cta .note"), t, 25.1, 99, { dur: 1.0 });
+  show($("#req-title"), t, 27.5, 31.9, { dur: 1.2 });
+  show($("#card"), t, 27.8, 31.9, { dur: 1.2, y: 60, blur: 0, scale: 0.97 });
+  show($("#r1"), t, 28.3, 31.9, { dur: 0.9, y: 24 });
+  show($("#r2"), t, 28.8, 31.9, { dur: 0.9, y: 24 });
+  show($("#r3"), t, 29.3, 31.9, { dur: 0.9, y: 24 });
+  show($("#r4"), t, 29.8, 31.9, { dur: 0.9, y: 24 });
+  show($("#req-foot"), t, 30.3, 31.9, { dur: 1.0 });
+
+  show($("#cta .apply"), t, 33.2, 99, { dur: 1.3, y: 50, blur: 14 });
+  show($("#cta .handle"), t, 33.8, 99, { dur: 1.1, y: 30, scale: 0.94 });
+  show($("#cta .note"), t, 34.4, 99, { dur: 1.0 });
 
   grain(frame);
   renderer.render(scene, camera);
